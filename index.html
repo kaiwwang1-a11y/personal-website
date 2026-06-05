@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>王楷文｜Digital Marketing Portfolio</title>
+    <meta
+        name="description"
+        content="王楷文个人作品集主页：数字营销、品牌增长、SEO、内容营销、AI 客服逻辑与数据分析。"
+    />
+
+    <!--
+        =========================================================
+        王楷文个人主页 HTML
+        说明：
+        1. 这是单文件版本，不需要额外图片、字体或外部 JS 库。
+        2. CSS / HTML / JS 都保存在同一个文件里，方便直接上传 Vercel。
+        3. 已做成非压缩、可编辑版本，后续改文案、颜色、模块会更方便。
+        =========================================================
+    -->
+
+    <style>
+        /* =========================================================
+           01. Global Theme Tokens
+           ========================================================= */
+        :root {
+            --bg: #070a12;
+            --bg-deep: #050713;
+            --bg-soft: #0b1324;
+            --card: rgba(255, 255, 255, 0.075);
+            --card-strong: rgba(255, 255, 255, 0.12);
+            --stroke: rgba(255, 255, 255, 0.15);
+            --stroke-strong: rgba(255, 255, 255, 0.22);
+            --text: #f6f8ff;
+            --text-soft: #dce5ff;
+            --muted: #aab4cf;
+            --muted-2: #7f8aa7;
+            --cyan: #29e7ff;
+            --green: #50ffc5;
+            --blue: #5c7cff;
+            --violet: #a765ff;
+            --pink: #ff5fd7;
+            --yellow: #ffe176;
+            --danger: #ff6f90;
+            --radius-xl: 34px;
+            --radius-lg: 26px;
+            --radius-md: 18px;
+            --shadow: 0 24px 90px rgba(0, 0, 0, 0.45);
+            --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --max-width: 1180px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family:
+                "Inter",
+                "HarmonyOS Sans SC",
+                "PingFang SC",
+                "Microsoft YaHei",
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 8% 12%, rgba(41, 231, 255, 0.21), transparent 28%),
+                radial-gradient(circle at 86% 10%, rgba(167, 101, 255, 0.22), transparent 30%),
+                radial-gradient(circle at 55% 82%, rgba(255, 95, 215, 0.14), transparent 32%),
+                linear-gradient(180deg, #050713 0%, #091324 48%, #050713 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 90%);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.05;
+            mix-blend-mode: screen;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        ::selection {
+            color: #06101b;
+            background: var(--cyan);
+        }
+
+        /* =========================================================
+           02. Reusable Layout
+           ========================================================= */
+        .container {
+            width: min(var(--max-width), calc(100% - 40px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass {
+            border: 1px solid var(--stroke);
+            background: var(--card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: var(--shadow);
+        }
+
+        .gradient-text {
+            background: linear-gradient(110deg, #ffffff 0%, #dce6ff 28%, var(--cyan) 48%, var(--violet) 72%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 28px rgba(41, 231, 255, 0.16));
+        }
+
+        .section {
+            padding: 92px 0;
+            position: relative;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 28px;
+            margin-bottom: 34px;
+        }
+
+        .section-kicker {
+            margin-bottom: 12px;
+            color: var(--cyan);
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            max-width: 820px;
+            font-size: clamp(32px, 4vw, 56px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+        }
+
+        .section-desc {
+            max-width: 440px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.78;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text-soft);
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition:
+                opacity 0.75s var(--ease),
+                transform 0.75s var(--ease);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           03. Animated Background
+           ========================================================= */
+        #particleCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            z-index: 0;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            filter: blur(8px);
+            opacity: 0.86;
+            background: radial-gradient(
+                circle,
+                rgba(41, 231, 255, 0.16),
+                rgba(167, 101, 255, 0.08) 38%,
+                transparent 70%
+            );
+        }
+
+        /* =========================================================
+           04. Navigation Bar
+           ========================================================= */
+        .topbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            z-index: 30;
+            width: min(1060px, calc(100% - 32px));
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 12px 14px 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            background: rgba(7, 10, 18, 0.58);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: max-content;
+        }
+
+        .logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            color: #07101b;
+            font-weight: 950;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--cyan), var(--violet) 58%, var(--pink));
+            box-shadow: 0 0 34px rgba(41, 231, 255, 0.35);
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 1px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .nav a {
+            padding: 10px 12px;
+            border-radius: 999px;
+            color: rgba(246, 248, 255, 0.72);
+            font-size: 13px;
+            transition:
+                color 0.25s var(--ease),
+                background 0.25s var(--ease);
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: max-content;
+            padding: 10px 14px;
+            border-radius: 999px;
+            color: #06101b;
+            font-size: 13px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            box-shadow: 0 0 28px rgba(41, 231, 255, 0.25);
+        }
+
+        .menu-btn {
+            display: none;
+            border: 0;
+            border-radius: 999px;
+            padding: 10px 12px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           05. Hero Section
+           ========================================================= */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            align-items: center;
+            padding: 126px 0 74px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            align-items: center;
+            gap: 44px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            padding: 9px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+            color: var(--text-soft);
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+        }
+
+        .online-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 20px var(--green);
+        }
+
+        .hero h1 {
+            margin-bottom: 24px;
+            font-size: clamp(44px, 7.7vw, 96px);
+            line-height: 0.95;
+            letter-spacing: -4px;
+        }
+
+        .hero-desc {
+            max-width: 760px;
+            margin-bottom: 30px;
+            color: rgba(246, 248, 255, 0.75);
+            font-size: clamp(16px, 1.45vw, 20px);
+            line-height: 1.9;
+        }
+
+        .hero-desc b {
+            color: #ffffff;
+            font-weight: 850;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 30px 0 28px;
+        }
+
+        .btn {
+            min-height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 850;
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            cursor: pointer;
+            transition:
+                transform 0.28s var(--ease),
+                background 0.28s var(--ease),
+                box-shadow 0.28s var(--ease);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.11);
+            box-shadow:
+                0 18px 48px rgba(0, 0, 0, 0.26),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .btn.primary {
+            color: #06101b;
+            border: 0;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            box-shadow: 0 0 44px rgba(41, 231, 255, 0.28);
+        }
+
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .stat-pill {
+            padding: 15px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.055);
+            backdrop-filter: blur(18px);
+        }
+
+        .stat-pill strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 23px;
+            line-height: 1;
+        }
+
+        .stat-pill span {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        /* =========================================================
+           06. Profile Stage / 3D Card
+           ========================================================= */
+        .profile-stage {
+            position: relative;
+            perspective: 1100px;
+        }
+
+        .orbit {
+            position: absolute;
+            inset: -20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 36px;
+            opacity: 0.65;
+            animation: float-y 7s ease-in-out infinite;
+        }
+
+        .orbit::before,
+        .orbit::after {
+            content: "";
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan);
+        }
+
+        .orbit::before {
+            top: 11%;
+            right: 18%;
+        }
+
+        .orbit::after {
+            left: 16%;
+            bottom: 12%;
+            background: var(--pink);
+            box-shadow: 0 0 20px var(--pink);
+        }
+
+        .profile-card {
+            position: relative;
+            min-height: 610px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 38px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+                radial-gradient(circle at 25% 18%, rgba(41, 231, 255, 0.2), transparent 34%),
+                radial-gradient(circle at 84% 24%, rgba(167, 101, 255, 0.22), transparent 28%);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(24px);
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease;
+        }
+
+        .profile-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                115deg,
+                transparent 10%,
+                rgba(255, 255, 255, 0.34) 18%,
+                transparent 28%,
+                transparent 65%,
+                rgba(41, 231, 255, 0.22) 75%,
+                transparent 88%
+            );
+            transform: translateX(-75%);
+            animation: shine 8s ease-in-out infinite;
+        }
+
+        .profile-inner {
+            position: relative;
+            z-index: 2;
+            min-height: 610px;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 11px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 999px;
+            color: var(--text-soft);
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .avatar {
+            position: relative;
+            width: 178px;
+            height: 178px;
+            display: grid;
+            place-items: center;
+            margin: 26px auto 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 44px;
+            background:
+                linear-gradient(135deg, rgba(41, 231, 255, 0.26), rgba(167, 101, 255, 0.2), rgba(255, 95, 215, 0.2)),
+                rgba(255, 255, 255, 0.06);
+            box-shadow:
+                0 32px 90px rgba(41, 231, 255, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
+            transform: translateZ(45px);
+        }
+
+        .avatar::before {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            border: 1px solid rgba(41, 231, 255, 0.28);
+            border-radius: 54px;
+            filter: drop-shadow(0 0 20px rgba(41, 231, 255, 0.3));
+            animation: pulse 3s infinite;
+        }
+
+        .avatar span {
+            font-size: 64px;
+            font-weight: 950;
+            letter-spacing: -6px;
+            background: linear-gradient(135deg, #ffffff, var(--cyan), var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .identity {
+            text-align: center;
+            transform: translateZ(35px);
+        }
+
+        .identity h2 {
+            margin-bottom: 8px;
+            font-size: 32px;
+            letter-spacing: -1px;
+        }
+
+        .identity p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 26px;
+            transform: translateZ(32px);
+        }
+
+        .signal {
+            min-height: 95px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .signal .label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .signal strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 20px;
+        }
+
+        .signal small {
+            display: block;
+            color: rgba(246, 248, 255, 0.68);
+            line-height: 1.55;
+        }
+
+        .floating-card {
+            position: absolute;
+            z-index: 4;
+            padding: 14px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            color: var(--text-soft);
+            font-size: 12px;
+            background: rgba(7, 10, 18, 0.55);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+            animation: float-y 6s ease-in-out infinite;
+        }
+
+        .floating-card b {
+            display: block;
+            margin-bottom: 4px;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .float-1 {
+            left: -18px;
+            top: 130px;
+        }
+
+        .float-2 {
+            right: -22px;
+            bottom: 160px;
+            animation-delay: -1.5s;
+        }
+
+        .float-3 {
+            left: 42px;
+            bottom: 44px;
+            animation-delay: -2.4s;
+        }
+
+        /* =========================================================
+           07. Positioning Section
+           ========================================================= */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 20px;
+        }
+
+        .story-card {
+            position: relative;
+            min-height: 360px;
+            overflow: hidden;
+            padding: 28px;
+            border-radius: var(--radius-xl);
+        }
+
+        .story-card::after {
+            content: "";
+            position: absolute;
+            right: -110px;
+            bottom: -120px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 231, 255, 0.2), transparent 68%);
+        }
+
+        .story-card h3 {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 16px;
+            font-size: 30px;
+            letter-spacing: -1px;
+        }
+
+        .story-card p {
+            position: relative;
+            z-index: 1;
+            margin: 15px 0;
+            color: rgba(246, 248, 255, 0.74);
+            line-height: 1.9;
+        }
+
+        .quote {
+            position: relative;
+            z-index: 1;
+            margin-top: 24px;
+            padding: 19px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            color: var(--text-soft);
+            line-height: 1.75;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .focus-panel {
+            display: grid;
+            gap: 14px;
+            padding: 22px;
+            border-radius: var(--radius-xl);
+        }
+
+        .focus-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+            transition:
+                transform 0.28s var(--ease),
+                background 0.28s var(--ease);
+        }
+
+        .focus-item:hover {
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(41, 231, 255, 0.2);
+            border-radius: 15px;
+            color: var(--cyan);
+            font-size: 20px;
+            background: rgba(41, 231, 255, 0.12);
+        }
+
+        .focus-item h4 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .focus-item p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           08. Impact Dashboard
+           ========================================================= */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .metric-card {
+            position: relative;
+            isolation: isolate;
+            min-height: 190px;
+            overflow: hidden;
+            padding: 22px;
+            border-radius: var(--radius-lg);
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            right: -50px;
+            bottom: -60px;
+            z-index: -1;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 231, 255, 0.22), transparent 68%);
+        }
+
+        .section-desc {
+            display: none;
+        }
+
+        .metric-card:nth-child(2)::before {
+            background: radial-gradient(circle, rgba(80, 255, 197, 0.2), transparent 68%);
+        }
+
+        .metric-card:nth-child(3)::before {
+            background: radial-gradient(circle, rgba(255, 95, 215, 0.18), transparent 68%);
+        }
+
+        .metric-card:nth-child(4)::before {
+            background: radial-gradient(circle, rgba(255, 225, 118, 0.18), transparent 68%);
+        }
+
+        .metric-number {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 44px;
+            font-weight: 950;
+            line-height: 1;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff, var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .metric-card h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .metric-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           09. Timeline Experience
+           ========================================================= */
+        .timeline {
+            position: relative;
+            display: grid;
+            gap: 22px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            bottom: 12px;
+            left: 31px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--cyan), rgba(167, 101, 255, 0.65), transparent);
+        }
+
+        .job {
+            position: relative;
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 18px;
+        }
+
+        .node {
+            z-index: 2;
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(41, 231, 255, 0.25);
+            border-radius: 22px;
+            color: var(--cyan);
+            font-weight: 950;
+            background: rgba(41, 231, 255, 0.1);
+            box-shadow: 0 0 26px rgba(41, 231, 255, 0.18);
+        }
+
+        .job-card {
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            border-radius: var(--radius-xl);
+            transition: transform 0.28s var(--ease);
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .job-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .job-title h3 {
+            margin-bottom: 6px;
+            font-size: 24px;
+            letter-spacing: -0.7px;
+        }
+
+        .job-title span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .time-pill {
+            padding: 8px 11px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            color: var(--text-soft);
+            font-size: 12px;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .impact-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .impact-item {
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .impact-item strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .impact-item p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.62;
+        }
+
+        /* =========================================================
+           10. Projects
+           ========================================================= */
+        .project-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 999px;
+            color: rgba(246, 248, 255, 0.72);
+            font-size: 13px;
+            font-weight: 750;
+            background: rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition:
+                color 0.25s var(--ease),
+                background 0.25s var(--ease),
+                border-color 0.25s var(--ease);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: #06101b;
+            border-color: transparent;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+        }
+
+        .project-search {
+            width: min(340px, 100%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .project-search input {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            color: #ffffff;
+            font-size: 14px;
+            background: transparent;
+        }
+
+        .project-search input::placeholder {
+            color: rgba(246, 248, 255, 0.45);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .project-card {
+            position: relative;
+            min-height: 360px;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            transition: transform 0.34s var(--ease);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .project-visual {
+            position: relative;
+            height: 138px;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            background:
+                radial-gradient(circle at 20% 20%, rgba(41, 231, 255, 0.34), transparent 30%),
+                radial-gradient(circle at 80% 40%, rgba(255, 95, 215, 0.25), transparent 30%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+        }
+
+        .project-visual::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transform: skewX(-12deg);
+            animation: slide-line 4.4s ease-in-out infinite;
+        }
+
+        .project-chip-row {
+            position: absolute;
+            right: 16px;
+            bottom: 14px;
+            left: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-body {
+            padding: 22px;
+        }
+
+        .project-body h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+            letter-spacing: -0.6px;
+        }
+
+        .project-body p {
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.68;
+        }
+
+        .project-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-foot span {
+            color: rgba(246, 248, 255, 0.62);
+            font-size: 12px;
+        }
+
+        .arrow-box {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.08);
+            transition:
+                color 0.25s var(--ease),
+                background 0.25s var(--ease);
+        }
+
+        .project-card:hover .arrow-box {
+            color: #06101b;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+        }
+
+        /* =========================================================
+           11. Skills
+           ========================================================= */
+        .skills-wrap {
+            display: grid;
+            grid-template-columns: 1fr 0.82fr;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        .skill-board {
+            padding: 24px;
+            border-radius: var(--radius-xl);
+        }
+
+        .skill-category {
+            margin-bottom: 22px;
+        }
+
+        .skill-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .skill-top h3 {
+            font-size: 18px;
+        }
+
+        .skill-top span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 14px;
+            color: rgba(246, 248, 255, 0.78);
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.065);
+            transition:
+                transform 0.24s var(--ease),
+                color 0.24s var(--ease),
+                border-color 0.24s var(--ease),
+                box-shadow 0.24s var(--ease);
+        }
+
+        .skill-tag:hover {
+            color: #ffffff;
+            border-color: rgba(41, 231, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(41, 231, 255, 0.11);
+        }
+
+        .radar-card {
+            position: relative;
+            min-height: 430px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 24px;
+            border-radius: var(--radius-xl);
+        }
+
+        .radar-card::before {
+            content: "";
+            position: absolute;
+            top: -120px;
+            right: -100px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(167, 101, 255, 0.22), transparent 68%);
+        }
+
+        .radar-title {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 22px;
+            font-size: 28px;
+            letter-spacing: -1px;
+        }
+
+        .bars {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 17px;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            color: var(--text-soft);
+            font-size: 13px;
+        }
+
+        .bar-track {
+            height: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .bar-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+            transition: width 1.2s var(--ease);
+        }
+
+        /* =========================================================
+           12. Education
+           ========================================================= */
+        .education-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .edu-card {
+            position: relative;
+            min-height: 230px;
+            overflow: hidden;
+            padding: 26px;
+            border-radius: var(--radius-xl);
+        }
+
+        .edu-card::before {
+            content: "";
+            position: absolute;
+            top: -90px;
+            right: -90px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 231, 255, 0.18), transparent 70%);
+        }
+
+        .edu-card h3,
+        .edu-card p,
+        .edu-meta {
+            position: relative;
+            z-index: 1;
+        }
+
+        .edu-card h3 {
+            margin-bottom: 10px;
+            font-size: 25px;
+            letter-spacing: -0.6px;
+        }
+
+        .edu-card p {
+            color: var(--text-soft);
+            line-height: 1.68;
+        }
+
+        .edu-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        /* =========================================================
+           13. Contact
+           ========================================================= */
+        .contact-panel {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            align-items: center;
+            gap: 24px;
+            overflow: hidden;
+            padding: 32px;
+            border-radius: 36px;
+        }
+
+        .contact-panel::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(41, 231, 255, 0.2), transparent 32%),
+                radial-gradient(circle at 78% 40%, rgba(255, 95, 215, 0.16), transparent 34%);
+        }
+
+        .contact-copy,
+        .contact-cards {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-copy h2 {
+            max-width: 720px;
+            margin-bottom: 16px;
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+        }
+
+        .contact-copy p {
+            max-width: 620px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .contact-cards {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.075);
+        }
+
+        .contact-card small {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--muted);
+        }
+
+        .copy-btn {
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 14px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition:
+                color 0.22s var(--ease),
+                background 0.22s var(--ease);
+        }
+
+        .copy-btn:hover {
+            color: #06101b;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+        }
+
+        .footer {
+            padding: 38px 0 46px;
+            color: rgba(246, 248, 255, 0.46);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            z-index: 99;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            color: #ffffff;
+            font-size: 13px;
+            background: rgba(7, 10, 18, 0.78);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+            transform: translate(-50%, 120px);
+            transition: transform 0.35s var(--ease);
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+        }
+
+        /* =========================================================
+           14. Animations
+           ========================================================= */
+        @keyframes shine {
+            0%,
+            45% {
+                transform: translateX(-80%);
+            }
+            60%,
+            100% {
+                transform: translateX(80%);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.45;
+                transform: scale(0.98);
+            }
+            50% {
+                opacity: 0.95;
+                transform: scale(1.04);
+            }
+        }
+
+        @keyframes float-y {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-14px);
+            }
+        }
+
+        @keyframes slide-line {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: translateX(-35%) skewX(-12deg);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateX(35%) skewX(-12deg);
+            }
+        }
+
+        /* =========================================================
+           15. Responsive Design
+           ========================================================= */
+        @media (max-width: 980px) {
+            .hero-grid,
+            .story-grid,
+            .skills-wrap,
+            .contact-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-stage {
+                max-width: 620px;
+                margin: 20px auto 0;
+            }
+
+            .metrics-grid,
+            .mini-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .impact-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .menu-btn {
+                display: inline-block;
+            }
+
+            .topbar.open .nav {
+                position: absolute;
+                top: 68px;
+                right: 0;
+                left: 0;
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                padding: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: 26px;
+                background: rgba(7, 10, 18, 0.88);
+                backdrop-filter: blur(22px);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                width: min(100% - 28px, var(--max-width));
+            }
+
+            .topbar {
+                top: 10px;
+                width: calc(100% - 20px);
+                padding: 10px 12px;
+            }
+
+            .brand-text span,
+            .nav-cta {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 110px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2.5px;
+            }
+
+            .profile-card,
+            .profile-inner {
+                min-height: auto;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .mini-stats,
+            .metrics-grid,
+            .project-grid,
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-toolbar {
+                align-items: stretch;
+            }
+
+            .project-search {
+                width: 100%;
+            }
+
+            .contact-card {
+                align-items: flex-start;
+            }
+
+            /* Profile card: English name + LinkedIn */
+            .english-name {
+            margin-top: -2px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.82);
+            }
+
+            .linkedin-pill {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 16px;
+            border-radius: 999px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: 0.25s ease;
+            }
+
+            .linkedin-pill span {
+            width: 24px;
+            height: 24px;
+            border-radius: 7px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #07101b;
+            font-size: 13px;
+            font-weight: 950;
+            background: linear-gradient(135deg, #28e6ff, #48ffc2);
+            }
+
+            .linkedin-pill:hover {
+            transform: translateY(-2px);
+            border-color: rgba(40, 230, 255, 0.42);
+            box-shadow: 0 16px 40px rgba(40, 230, 255, 0.16);
+            }
+        }
+
+            /* Profile card avatar photo */
+            .photo-avatar {
+            overflow: hidden;
+            padding: 0;
+            background:
+            linear-gradient(135deg, rgba(40, 230, 255, 0.18), rgba(167, 101, 255, 0.18)),
+            rgba(255, 255, 255, 0.06);
+            }
+
+            .photo-avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 36%;
+            border-radius: inherit;
+            filter: saturate(1.04) contrast(1.03);
+            }
+
+           .photo-avatar::after {
+           content: "";
+           position: absolute;
+           inset: 0;
+           border-radius: inherit;
+           pointer-events: none;
+           background:
+            linear-gradient(135deg, rgba(40, 230, 255, 0.12), transparent 36%),
+            linear-gradient(315deg, rgba(255, 95, 215, 0.10), transparent 34%);
+           mix-blend-mode: screen;
+           }
+
+    </style>
+</head>
+
+<body>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         Navigation
+         ========================================================= -->
+    <header class="topbar" id="topbar">
+        <a class="brand" href="#home" aria-label="Back to top">
+            <div class="logo">KW</div>
+            <div class="brand-text">
+                <strong>王楷文</strong>
+                <span>Digital Marketing / Growth / AI</span>
+            </div>
+        </a>
+
+        <nav class="nav" id="nav">
+            <a href="#story">定位</a>
+            <a href="#impact">数据</a>
+            <a href="#experience">经历</a>
+            <a href="#projects">项目</a>
+            <a href="#skills">能力</a>
+            <a href="#contact">联系</a>
+        </nav>
+
+        <a class="nav-cta" href="mailto:wang_kw0312@sina.com">Let’s Connect →</a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">☰</button>
+    </header>
+
+    <!-- =========================================================
+         Hero Section
+         ========================================================= -->
+    <main class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-copy reveal">
+                <div class="eyebrow">
+                    <span class="online-dot"></span>
+                    Open to Digital Marketing Internship
+                </div>
+
+                <h1>
+                    <span class="gradient-text">把数字营销</span><br />
+                    做成可追踪的增长路径。
+                </h1>
+
+                <p class="hero-desc">
+                    我关注的不只是“做内容”或“改页面”，而是用
+                    <b>官网数字资产、Email Marketing、用户旅程设计与 AI 客服逻辑</b>
+                    把品牌内容转化为更清晰的展示页面、更连贯的触达流程，以及更容易承接线索的转化路径。
+                    目前聚焦数字营销、官网内容运营、B2B 品牌增长与 AI 驱动的营销自动化。
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn primary" href="#projects">查看项目亮点</a>
+                    <a class="btn" href="#experience">浏览实习经历</a>
+                    <button class="btn" type="button" data-copy="wang_kw0312@sina.com">复制邮箱</button>
+                </div>
+
+                <div class="mini-stats">
+                    <div class="stat-pill">
+                        <strong>15%</strong>
+                        <span>产品页浏览量提升</span>
+                    </div>
+                    <div class="stat-pill">
+                        <strong>30%+</strong>
+                        <span>官网自然流量增长</span>
+                    </div>
+                    <div class="stat-pill">
+                        <strong>1000+</strong>
+                        <span>调研样本与数据分析</span>
+                    </div>
+                    <div class="stat-pill">
+                        <strong>8+</strong>
+                        <span>校园活动策划落地</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-stage reveal">
+                <div class="orbit"></div>
+
+                <div class="floating-card float-1">
+                    <b>Growth Mindset</b>
+                    内容 × 数据 × 转化
+                </div>
+
+                <div class="floating-card float-2">
+                    <b>AI-ready</b>
+                    客服逻辑 / 自动化流程
+                </div>
+
+                <div class="floating-card float-3">
+                    <b>Global View</b>
+                    墨尔本大学 + 香港中文大学
+                </div>
+
+                <div class="profile-card" id="tiltCard">
+                    <div class="profile-inner">
+                        <div class="status-row">
+                            <div class="badge">📍 Shenzhen / Hong Kong / Global</div>
+                            <div class="badge">GPA 3.7 / 4.0</div>
+                        </div>
+
+                        <div class="avatar photo-avatar">
+                          <img
+                            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wgARCAIIAggDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAMBAgQFBgcI/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAECAwQF/9oADAMBAAIQAxAAAAH1QAAAAAAAAABbxB2vKea6as7C11TaYWNUyce28jtyY0ilpRb7rKGdDHl2Yc1kcdB1PneRXp3eeM7+PUGj3EsgAAAAAAAAAAAAAAAAAAKYlvkJsOJxYavkxbSaG6wvtIvvspVa23FY6yFskVxdLETKgvyq1+ZFAbeGHPOj9I8V6w9Wv0m6zagAAAAAAAAAAAAAAAAc3vfMKweD3GiqlLkWlxbWiF1FX2VtLqVuLaVsLrrKmTPhSoyLJKniyYrLMhYS2RVPQe+8D9Il9EUrmgAAAAAAAAAAAAAAKVoafwvvPNtSOzMqYVLpCGyWyWJdZF11kpbS6lVXWliqKVsF90dxlz4WXqZClLLrLYyOkdsux2Oi2J77n+U+q5tQAAAAAAAAAAAAAAMfI588VwMzH1JY5cSyzNuxJbca+CKL7ZUsUorW8stnjqK2dEFZoi26ypWt01T5Omz7Jb8PKsgxdhiRHk4t6917F4h7fLeIAAAAAAAAAAAAAAcl1vn55ZfG1L4MiAvxpBjWSSSw23zRjzbHe51zuT2c2d8Lh+gamzmcnf7GzjMTuNJLyzPj3zxqZMdQ25WMZcURNlGvswbZ7F2v0D84++y7kQAAAAAAAAAAAAAA809L8krhIpFkl0cgx8q0gvyL86x+hm6vh6MPczS53DdLcY0OfWzAmyqGDrt9iS+f6bvdDvHL12GH28+OyGs6uPLhltzcEmVVHWR7Z4z67HYiUAAAAAAAAAAAAACnjHs/jlcVfFYS2wTkmbj5edX7GDoOfXO3eHseXa++lxWtbrKVqsouoWQZMcavB3kDXHcz6Rx28aWttfR5IYpZZdVJSWL4J8ayvuXhfvi9IIAAAAAAAAAAAAAAeZ+mcMeM2zKsyaTGbnV2fD013EGy59MnKilJLrLi+626yqlbKgrbWhHFPZLg8v1+qXzO3c43Xz4eVfmGgwOh1PTnhRTwWZf0Z89/R0SgAAAAAAAAAAAAAAc50eEfPEOxwKlzMbPN3s8TY+X2ZObi5ks8kcpdfS+q3Lrm2taltai2l9CyyS1YYMqOXn8Lo8U5ifcRJzOh6zmO/m1uPmQbxuvoLxb2qAAAAAAAAAAAAAAAFKjyPhfWvKKbjS9Nne7yo4fP6c2fkJ+nLs8zjNovSy6jY51lXJLI01qR0lotlJLYsjkw1vhxdXZtsfQxWdDBi5mdYPG97yW+egxsqztw7L17y31PNAAAAAAAAAAAAAAAA0/gf0j89Vg9jx/ac+ubzfTS53x93d01jz+L0LXVye7lgOs3fG7XHTpq67Kzci2CMn18Gm1I9KpvGDg9Lms8fm9fSXlujhgl3fPb/R51x9ts/fzesdrp9xKAAAAAAAAAAAAAAABTxT2vlzzHe8l1GOml3Gp67TKycG3z+nZW6uHU2GPTJzrAjz8PWdrtuE6yNrg38+t8ODt9Zhlklxu6fXLnY4tLpdbreg03XhWLT5escpu9j1+89tJotpm5IuQAAAAAAAAAAAAAEUull1MfHZPL16LptXu5jV7GuRneg2OVm7vJab0LQdeGn6nPy+fXHizI8a4v0HjO7L+M7nm01231XRy6PSdDmbnlsPT53Tlm6HstTnotury1g52ZDrHEej8L1OkG+0PTZ7dSO/zwAAAAAAAAAAAAAGn3GFNeWYu91/D337PDz3GmTfPnVsmXcQ3y3WR1urqWarb6/N03TazZzUup2+HrPMdZq9xm2WT26zFbkDCg2VudarB3+sKQZMNnLdZz/T7zH0mk6Ss0dfKAAAAAAAAAAAAAAtuHn+s6fRcfbi7LT7fOdhNFPnWRJFPZavqka+wixL6TUGdr89cjEycOymTj1M4vZjX0W2klkY0c1i4eJm4Nzq+g1G32yuo0PQb4BvmAAAAAAAAAAAAAABz/ACva+fcvVBtdNs8XeZGJmZ1ffS+i4R2ZJMXCysVabHEzFlw83GswMuC/NyMilbm6sdEujuLFZLFGHg5mvsh2mry9b6HoNfsO3jC5AAAAAAAAAAAAAAAi8y9S8859tNNDXn23+x0m2zc2WCay+6y4rbdamrkxMVvYV4bdL0ceo0x2tnN75NpPi5LNaKItrYscEuKYeszMLWZcvH6drf1O/jAAAAAAAAAAAAAAAAaTdpfJ7PTvOOfebb6bZ8uu0nxMkmujkStKK0ut6mNrX27Ke50d+4tOZp0d83dfZcxdSlCkaKLcKfCrGsdJvnZ09XXiFyAAAAAAAAAAAAAAAAA8/wDQOZzrk9hrM7z+rbZODlLkyY95LSGlklLRLdBJVbrKF1LUX1hE9ltstIboyLFyMSzE7zifRevCo6cgAAAAAAAAAAAAAAAAAGNkjyfLztXw9W3y9bn43k3WVMVFyut9fjc1I7dFbpop06NoFz0MvL2M9dbyW8cdxdbdnFkcmMRYU+Fc77r9dsfR5QsAAAAAAAAAAAAAAAAAAA1XnfrPAY6Yew0ufw9O4lw5ifU7KO3S5c8V9E98OXUaSO5jwc22WDZWT543222zNuDPgpZl6r0Lryzx14AAAAAAAAAAAAAAAAAAAAOf6DSy+e5vPbjh69rmavPzcq+K8uslqQ2ZNKgukrVl16KW1pFIqxJDr8jW2SeqeY+nduAb5gAAAAAAAAAAAAAAAAAAANTtfKl0k91PP7NxsuY3UbWXGniebHyC5dUtXKjslikssujW3Ek1VluBdmS53onk3Xd/N1Y3zAAAAAAAAAAAAAAAAAAAUeSWW81qfSNsKWXI8Hv0WTPgV0ObzO3s22TrcqM1DcS0stsuttjlYzVWNXTPWTJumkxOa6PN9fm2nV/OnuWuW5GNAAAAAAAAAAAAAAAAADnU5fzC+3vjc+hcp3q87lW5HzvfhYO3x5dFXOxLc3Yc/LZ0c3PSpvGkG4x9dYX4eXLLDsLMsuukprOt6PSdJ6fP5fp/RPKvR5voXYeC+5cOuQM0AAAAAAAAAAAAAAAa+yPw/Zc33521XV33Ycz1KYeLvdP4/XDHPbw7YOHtsea1TNtXFkyLiC7KkrFvyrmcaWa+rJ6yWUhlvslz8mD1+PD8U9t8e7ctZ03M2519JT+Tem895g56AAAAAAAAAAAAIOMs7rU+R6jefVM6XjeueCirSyklkh6P1XKdTE91bsa0VnQaTy+uKKenLrh1nRFXIvrGvnuIKzLIZK3il0lkW+XenyxwTY3Tnj+U+teQ9caiOSOWb2Hxjtl6jZ5/kuXuVfBO55b9CYeZjQAAAAAAAxzIcL5/qevcF59TecqCsnTN3qui9GMLxXpeQspRUrfbfXpfQ8308mRLFNz3RfSXRQ9HpfP6cWlacu0ssUqVrWpSl0Qtps9Zh21a+jzUpdZvEMMsdmJ416v5J0zBZfaW5+Fce/6bM2Ob4DTf8/uS9XyDL2fqPnDPxv6CeY9zz1tRmgAHP8Pqercr5Bgaz3fGY1dylL66lsi6yu41fshtOf3ni8uBZWllLqC++y+u/wCz4D0HK6aKXGr6q5tq4aPC6rTcPTgzQScu09LLC62Xe9OePl1r38tqtLKWXx1FZfFZp/IvWPKOuYKSRwupU9X63yn1XN5byb6A8S1NetuBQrdYOp7jx6ub9GyfPPa89+otK535/XV9PO2tyy2twVCoO97/AJfq5eS8v965yzyamy1RSSl5Wttx1vpXl/qObW+27NkusulrWlC6tvI2b/W8TuW95sOb3nPe9rRrnWgilbS2O+yrYpbbON847bieuKRTWrBJvOtjzr1zF30uVy3XRngV290WoEUVFKqFQAsatEFQqKVpUVKdlxt0e66/ze40MC4uooXXW1N/614p7VLfdbfi1rRFynAVNpuLzemeknlzO/GCa6XWNl1HnF/m9fo9La8bWlbSylVY2RBNZ5RzO31PbFLb7Za9Dz1T2zM5iLNy+I02PZbWtAKVoK0VAiipYglagFUqRcC3OF9e15m+PyGs0qC4JPcCWe4xVRdF50bnPXmbmdIdM9Nqzv5dPhm9dD6MeD1VoRbYF9oeDxHfmtIuyxfVOgMawfOA57FNRQsVClQACP/EADEQAAEEAQIFBAEDBQADAQAAAAEAAgMEEQUSBhATICEUIjFQQCMwQRUkMjM0FiU1Qv/aAAgBAQABBQL8Zzw1atqza0T9RMkn6TlL0d1pgie5wcc5G3lkoOXtTdzUG5W0ouKZIAorlfEMdd0UOrW6LoZ452fUkgLUOJY41Z1Gey6Xc1v87llPe5waU1uSQMYwsZXwhyY7yRlOBKyUMFNGxVNWrKKZlV1S+J0Hg/T2bcVSPU+JzOpJw5z5MkTDHzyHP4blBE8gCvHJvlbU4FNcVHOWp36oG+JUdRkbDUsiQNdu+lntRVxqmsNsWppjO/d5zlfCz45jljHLHMIBFuEyRYDlI0tQTQoz491aSjYistrW+ofo7upEHUbACc7e4rH7GUFnz8cvCygVhrh0yEzGc4ToA5N9qPhMeCQOk6hqfqn1Jd7PoZfDLthrZbNxr4+RPcEeR+AMDPPyhlDK3ZRam4kb8L+N2wv8OzujwWrSNVMj/odUm6NKeYyk+VtwsIDKICPYEfgL5c7szyHhNLkCv8hvQcCnDKJ8Mk2mFyYXQyUrbLtb6DivUsnamt8NCf5LfghYWef8IcjyPZlByacoBOym4Ke0tRK+EHITbDw1qHQs/nzyNhitS+omKxlTOCY0uc5uB4Tnd2PCPIrHZhA7VG7cifDdrk07FNGAhyb7o+HYOvOPj87XHhtCQ7nY3Oc7wfBgbgTP3vf4CHZhBEIhBuUGotR5hYD2glpZLlSe14PUA+XsLF/DDhaDa9Hdb8fncRu20M+4Dk0DcZMta3Jf8o+OWEGpkBK6Hh0JALE2PK9OnQp0eEWoBFvIr4LT1I4n9Nzwid7SEFTfsfB/q/O4teRXHzvTitvjGADtGE1vnGUI8qKq5yh00lM04BehGHUwRJQc0xUCvReHU1NVKliLVtWP09qxkEIO2JxymP3N2+1wRCgK0l5fR/O4vcE4+Pgt9ywnDkGeXDDYosqvS3KCiGpsQCDFsRjRrgptcMWwIwqasMTVvdJH5cMMaPG3DpG+Hjk34Y/KlG1zMEAdM8OuL9N/O4wdi6fjCz7iRuyMbMoNRZvdWreYIwEB2YWOeFKMiWMZnrqWLCYgnDw4eCPCYdpkHgYC8GPhl2aH53FT3SakVnyXec+R8tTQoYtzoI0xqx+wU4JzMqSHKsV1IzbJ8r/8kINyAtqbksxkfK4a2/0387iWLbbcSi7z8FqjamtKDFBH4jah+0Qi1OYposq5FtkQ/wAcYW3zK3aWlBwa952vb86Awt0387iwEOJ84W3JaPELMpsajiUbExqH7ZRCeFejy5zcKPyXDxt98zERtTjnlX/20Y2xVfzuKId1dw8gLGE0KBntZGo2JjU395wViLcrdfD68CMaiiybUa2ojC/mgzfajGG/na5AJab/APIH3DymNVce1jUwJiH7xTm5U1fcfT7E+umR4bbanJ/nlozN+oj8+5F1q1uIxSIeFEFC3wE1NQ5YQ78LHYQnNTm5RYtquMUgR5cNN/8AYfnlcR0RBORyqjLom+F1WtTZUyTKBCHIBYWOeFhYWEUUXYRei4LCIVmPcyZu1zh7iMLhYs9V9BxVFI+t8kHzRb7WfE83SabJyLRTLajtsTLITJQ5A8sdxeAnyp87VLbARuL1OVXs7kUQtRj2uyiuFo/1foNVj6tI+Cwe6qMML9jZnPe/pSr08pHTkCzI1NtPYoNSeFVulyZMHDcsrcty3qay1im1eNpfq7nJ2oyPRsPcm2JAWTMW/BqT9eP+NTHsRXCzW+h+gc0ObejMVyPzJXGGBu5RtrRn1FYL1MRT+nInV2p9ONyFFoMMW0ROMYjl3jKyi8BPmVkOkT6PgUQU3T2JtVjUPTtXp6kik0tigifXlz41L/Tn3bd60uBsNT6A+VxFXl/qlrTPQQVImTxPPmnTMrY44olvJ5EJzU5qLGozSRCu8Pa3ySx6eVYsiBwD5FsagwlNiWMLJT4onqSs9i9ZI0x3muVzEsBGHaTW9TeYNrfodZiDINOzJYdVbKWRl0wOEHJ1qGNP1OtEP63SUeoVbHJzE5igkw+Ahg6si1CVrG1/7iQNWFuZGDqVNqGp0nIWYXolZWox+yKQxySxTyL1NOeTR4YtNq+vkUE7Z2/nSyNijk1OwTPrEclHS4/DEICy4SppJXuo1Wg64HMsMsWY6ekw9W3M2Sk5nva5viQZ1Kuz2lgWuM/R04f2gap5tjtTpllSpOK82SXzUI3wtlmrGOcPFo5r6dG0Qy+5tQOGpQtbELV18p0WRzn/AJ2rf8kcroZNQAfW09mK7ApW4OxdDyxharETbbP6NIVSptpNfHJIqsJifZZ7oYw+aLwFqcQkVIbGbdjGQFpeBNC7SZmvqaXsklfvT4MpsOBM32YTwombdWlcZl0fOkx7X/naqM1Hs8zksrVm7YWqRu5jG7x00AUFgLCwv5uBwVWP3s+FcZvYyEuX8Y8Fq/jY1ELYnR4TxmwnKyNt+CPDdnvotx+fdZvqmP8AU1CLdEz4CYFCNpwsLHbZ8lowmIp4yvhzR4xzwtq2pzU1mXJytN/uI05uH0xiD84jIDPdcHsjTUwLblDyO1xwv8ifmNFFEeWHwsdr/KITgnKUZnjb5lb7mjaPz5o+ldss3NjKjOU1BNPPCwnYCcv8R8mNFOTDlN8FvlYxzwjyKcnJjd9ppw6L33PoNW/TFg7UxQlNQ55WVlYysYT3JgTAsJ4TThw9yHhB5C3rei7PY9PUTsTxkAaYC530Gpx9Sl5LB4MJUZQQCwtq2rasKYramppRcnram+CBlbVhYWFjkVInlQxkuHzRZsrfQSt3x/4ukxujODE5NKHaU85kTjgtejIt/J3xGct7SnFSFPKYTiCLe8DH0V+Po3HhMUbkwoIdhTnYmt2XRR9TVHuinejMp7F/NHUJnF0niD/X2FFPKkOUflvgaZXwPotTpeqjcCFGmKMpp7rkL3JrZ3Jkfh1TcfSLo7FKCDG2aZzBhvYSnFPcioInzvraW4u+kmpwTmRnRmaoymod2AgOZW0LAHc4pxTk8+NFjxH9Nq8fTutUZTSghzz+1nkUSiinJ5VCLpVPptch3QtUZTCgUORct3LK3hZHLeFlZWVlZRPIopxUMfXn+nsxdeAZaWFMKCHJ0nnqhdYJ03nehMUZXE7yuvhCcLqhdQJp5lOKcVo8W6b6jV6/RtNKYU1BFT194khtRP23EPWNXqJwPWOCGoFerncv7x623FtuOVSs9oa3bzcUU4qhB6et9RqVb1NZpTHKNyHIqaPJ2lpBymtBXp8r0y6QapEcprUwYHJxTinlabX9RZ+q1Wn6edhUbk1yBWU4ZRZlbEPC6i6iJysLamsxzynlOcicmlW9LB9VrnjT2uymlMegVnkQsLatqwscgOwlPcnuUH6lv6vWRu02KTplrkxNKCHLC2ratqwsdhRUhUr8LTW5vfV6t/8AOLVE/ao3prkOQQ5YWFjtKeVLJhNGTpY/v/qiQBqmvm7Za3KezCjkUT8pp5BDtKKKKe7CllTQZHBqkM8a0XXotTH1BIA4g1/1S0+q5wiblOYntwYpFG/KaUCge4olPcp5cLzI6Ni2pnsn1im6lZ0LWRqcP03wtf171ZDS98lcVdOgb7S1PYi3Cjm2pkuU16a5ArKysrKLk5+FNPheXmNia1YUoC6Pr9Nilmo2dL1KPU6/0vE2tY5aRD1bl5masI8YTmp8ac1NeWKOwhKmzITLqrqhGVOmwpJyVtJLGJrUAiFN8xQ9Ctr1Xp2NPvy6dYo3Yr9f6PW9UGm1XEvK4fjXT60DBjkQnNT2ItWE0lqErl1SuouoVucVjK2IMQamhAIpjOrdkWs1+tRctK1STTLEE8dmH6G9qENCLUL0uo2UFoDMVY/BtRbTyITmpzFtW1YWFhbUGrYg1bUAgOTyqMGE7ypW7mPGCtF1h+nTQzMnZ+fYs7Vrdsz2uQWhj+yAQw4SRGB3ItTmrYti2Lag1bFtW1YQag1YRKgg6zj4RT/i2zZZPyuHtQKhsCT825qtSiq2szanLZlbVrvcXu5BaJ/xNWEWiVskboHLCLUWoNW1bFtWFhYWEAsIqKEzOa0MaU5HytUGLx+VFI6KSlYbeq2Ll7TFS4ipW0DkfjSzx12XOLKsKt8Q37ir15Lc9SqypBxLbHYFo3/G1DkWh7ZYnQFYWFhYWFjlhY55UUJlLWhgRRR8DUHbrjufDVrZM5ocNXoeis09Ut0VT4sY5V7le238K5rVKirvF08intTWX4TWrRtL9HFasNqQWZ3WZuf8aUP7NqbzIDhNAYSjyHPHLCKyoq5egMDkUVYeI4ZHb5DzpzGvZb5GrUfV1OTJHRup8TXK6qcR0rKa4PH7k1iKuy7xZWhV3Xb11E8sIBcP6Z1HLX9S9TNzHLQ/NIIdmMiaDpHkOzKJ5Q1sdhR5al7okezT39SmVrlT0t3srXrNQ0+LHhVNTqXv2HODBa4loVlb4stSqaxLYfyAWOWm0HX7EbGxM1vUPR1j2Dlw6/MAQQ7MZE9fpcghzymtdI6GuIh2FHlfwKqdzC4cn6lFcQVPUUu4Eg1OIr1VVOJ6k6ZIyVvK3rtGmrfF071Zv2bZ54WObGl7tNpto1p5W14rtt92xy+OQ5cOH9RBDt+VPWLEOZKirumTI2xjtPJ6112ygnDs4et9C2E7DhqNQ0rf7Fe3PVdT4slYqmr07qzyxywsdugaYcrX69ueEjHfw7/1/szQRvJjewgFxip+e88m+6TiaTEHIjkE0lp0jUBdr+Vr9D1Nf9vH7Wi6pBZg5aho9e2dQovoSjt4fdi935wr2tpk0glj1Sy1O1W2VS1WK1+y47WxDDOJ35n56bXpTP8A/G6uYuHqTFXqV63IgrW4ootR/F03iB8CiljnZqVxlCvPM+xIO3RXbdQHff1yvK4VhK3p4LW4TQjCJFTvuhQIcO5/ueuIXbtR7KGtT1FTtw24nPawWdfp11d123b/ACNGdbbb199h15DtqSdKz3cQaztWVXnkgdWvQ21JWfGgMLOFM7c2hrBqOaQ4dh8CMLK1WTqaj26No/pBquhutKaCSu/8erVluS6dp8enw8QUhZo/z2jwq7urX5hahbfizpsoT27VGgqOqOrp8THMkfhSSZT2bjw/qL4O0jccJ3tEr98vZUmbXs0Nar3XK1Shtst8P2YXPrTx/t//xAAmEQABAwMFAAICAwAAAAAAAAABAAIRAxIhECAwMUATQTJRBCJw/9oACAEDAQE/Af8AMg1fGiyEGos9jWbI0dTREeiExmeB4x6GDisyrUfIEOuR/fkpjKJV6D1KlSp0lXK9AqoPJSThKtarQggFChEIq1QP2gCE7ryASMKkycldK4aFg+kMhddoC7JXSldp7Iy1NcSMqEWkeACSn0QAqfSAhOAKsxBTO5KlAQFE4X0qgxhW5lU2R2nBRAhUhhVgBT8De1UOE3aEUNk6FU1Wd/XwgyENk6FBFTsKZ0qh8NE43BFBHSNSgMJ5k+GifpHvdGhG0p7oHiBjKD7ttylSrtrzCc4u78bDndCjdUPlaZGrWSm01YV8ZRpJzI1KcZPlpu+tQYTag+0XfpXH7V4CLp1qHzDtDiqd+YdqOEKt+XmZ3wjSt+0D5WnOgOkLKyo2V0CgfFM60nzjhmMp7rjOoPPcjqEEypODvOO09920GFdxSp4adScHa51qc4nhuU7JUqeAbKdT6Or6lqJnklXcg2FwCb/IhfMXDHrGwtlOBQeWmQm1A8SPUNpVQQqP5cA4P//EACQRAAICAQQDAAIDAAAAAAAAAAABAhEQICExQAMSMEFgBBNR/9oACAECAQE/Af0pfqT6C1We57FntrfQWly0XhSE+qs2Sl8IvqrMn8vbYsXUY/pDjqTewkeh6FFFFYo9T0KIPqeQjsXI9mWPKx7FsbTI89Rvc8k62WKePYezw3WyxWITvaRJJPF9Bik7J8jdkWe29j4w3ZwWRL2okxF27Jsjz0GLkeUWMWi8okQ6T+qGR6Mx/VYXHRmvsiKvpuNfWKEq6cuPrDqyWa01lC6s1lZ2w3mK670WWXlEOvfxbPGtuqlZJbYT1UN48HFEo100hKiS207Gxejwj3JKuilYo1nywrf4pWQVIXA0ShW6+yVi8ZFLLGT8dcZrQlZCNCFlwUhwfyUGKCKL0PM/HW60xjZGNZXGU6eGrH4/8HFrQosUBLQl+dD0Th+VmMLEq0LjLFxocEx+N/SWiMHLgl/Gs/o9edS0J/VaJZRGdbEZWNWT8dfDb6sXOiWawjxuyfBLK0MT1//EADwQAAECAwQGCAUCBgMBAAAAAAEAAgMRIRASMVEEIDJBYXETIjBAUFKBkSNCYqGxM8EUJHKC0eE0c5Lw/9oACAEBAAY/Au7VXworC85bleiEvOc02/SbscgpXLo3K6wzbuV1tBLW3zVCVsqjR72DqzkhOAyY+6/lmuY7EOhu6wUtIDo0Dz3ahNewzDqjj4VVFmiyc7zHBG/GcSeOCNZ1x1K7kVwVCFuWGrj7qtbKhb/RBmkQS36mFNi6DF/li6USH+8ldkZ8d/hHSRXXQjDgwi1nE1ctmTuCmpOAPHXr7LKyluFmVtKLrBnourOSDIko0Jvzb2IAkF0ptOY8GJe9oTnymGUYP3V8yE7MOyrqTslusnSWYsouC6WCZEVTQx/QxQZtGR/wrsTqRmbTc/BOj0epnKf+EZvvRAetdw/2i49vjbI2/SV1ZAoB9Dmrw981UUO7JUnLEFMbEutiyuzG87ld3tofAjWQT2Q29HLHOSMNjLuZ7pWam0z4LisKKnWbkVjNv4XNXhjv4oFpUIxIodf6j8wePgUSIclIu4uOZU91le5b1MhXmy9LNyr7og4hcFcQjQtofdMjwzRw9vARokM4VcpK8cAi44CzCyvb5WTFCpj2XFT3G0IT2Sjojz1ItR9LvAHRHmTWiZTozt5Ut5xV3ABBowFg3BUVO48Vmv8A6ir1grzMLSgZNIAk7gq49/fMTnuzsmqb1zU/ayXceNt4LNSKzFhQnsOFeSp39zsqeqKARKvFHMqmGdstTBVC4WcRZh2BG+y9v1GHe0zTZGYlTv8ABh7i6aKlYTYUNSgVbcJLBTxCkuKnaDZxsmpoL6hiphTUlDvYgd/gMnUzNk7Lupzsw7HBGiwpuUl6qeSMvRc62nVYTu7/AAP+v91z1OdoCHZysKKkeS9VIblPU4LgVLegJUHf64NZIII2TUh3Q8KqaOoRvFgCZdx+bn38vPpYDqyQ7hOz1QPohZNHIo2QpiU+/wAN0tyn3cI81JBS1WzExPBQ2NwA7+19eqq94PuiShzRNkjbCbm4IDv7iTs1U7JDu9Aq6mRWCgj6qT8AiMEpkb0WO2t475OzCi4JuBl4D0jcHWcdSXd+KzB3WG8Bh4C1zdlpmVTU4rGu8rGzaWPaSmsVwWKuu9LZrhY6YnOoPgMRs5UxThYFxU6krYIWyVvWFteY4oSONdY8LOqFgqTWBQpdKx5FV2hYDbeuydel4DIp7fqsCkqvZ7rELqw3n+1fov8A/K2Hj+1ZHiptIUguWsW7rK/ZbLj6L/juPoutDLeYVLqmw+xVffUAGKh3RiJ+BEtaT0myAEyI4l0VxE2+VPfFfEYG7mrE+qvxHXW7gN66jANWomsuSrJ7U1zcCpb1gbLgE3FTiOlwCo331eswTzFFOC8ngcVJ1eakWkI3TNFQmkGRxkgPAn6SGFz2MOBqFN5J5oumQSujdjORtk6IOSE+kr9Kxif+V8OKPW2qOjmLck6f9XBfDF1bRXSklj54jen6Qc5Ntm5waOKrpEP3VI7V1YrT62iKMRig4HfWk6LpIbiIc6g0+ydAh6JUh0nSrPcE0xROO7cMV+kJc1NvqO/ue7AKbLjRlJaQ2KLkTo3cnJzvSy/OYfM2BjZtC6wmUyQ6tyifowhwyxx2iKhNaWzEqqYm+HkrwwsHCRVbORBUOzoodYn4XSP6ziakoufo4jAiXJE3Lk3TAG5Tuyct7m5Gx66X5nHHhY0BxBrUKZxzRbCN1uearvb3+WbgiSerOqc4ZIcbITsnS99To4jORyX6olyUmMvOOLiqhPaQLhrTNNaHSKMT5nG2RwIkobZ9UGU0TKqL7nWNZoworDIo9H1ghE0iVMGqQBtY3zPAtAOc1cGG+z+3v/JwThxT4Z9EwcLCgc7cFhqAjkrxGFBbxCbBIm2Yf7aktWEPKC79rYTpY2vPId/iDgvuqIWlnt2A3y1QZYKXYOieanpbAPGxqHGvf5I8KKWoDvHazUte7qQedjAMTRADd4BEycLwR7LHXlZj2TZ7p2MHlE/AYcXjdK4Hs59yJ4IvcokV3LwGIMqq4VLj2UtcdmXI5BNzNfAXNzEkPupjuQ7KSbDHzHwOINx6w7MrqNvO3BXpslldXxGydZOExklc0iHddmMDYOz6Z2/Z8DvM/UbhxUjQjsrzNpddjQsNSjJoTbcapdiQxt6SvR6Dy+CziQwTmnw/KZd6iRMzLwcnzifeobd8p+Dsi+Q95YzzHwh8PzBSOI18dTFU1cdd0XyiQ8JvjZiV1tqSo8FbTVstd6qsE+irCieypBieypBcv0gPVYN918gU4r73DXa07Rq7n4SQNptR2FbcFu7ME7DKnwvpGjqP+x7HGzHspIM+bF3PwtzvKQpjDs8OxgszeJ+GR+X7qR2e58VB/q8Mj/02XT3K8VC9fx4XM0C/hdGP8uMXef8A13OZsv6MZRW1aujfKHpAxb5uXhMzQI6Nox+D8zvP/pO0k0a2g4nuU91rSU3SoE2tcZzHyuVyJIaQzaHm4+EHRdGd8EbTvP8A6QaMTRQ4Q7jXUqnQ347ihEYS2JDKERtHjabl4M7QdHd/2OH4sB8gvIc+36qmdVozMkGZBNjAUiY80IsM8x5gmxoRocRkfBJg/GfRg/dEuMybIz+QRZ2eHZQm7m9ax9Ks6wsvtrDdttzTYsJ15jsD4EXxDhuTo0T0HlFpObjZ0owOPdHRj82HKxwO8SRGVl0unBdiMleYZ+AXIdXfhGHem1n3OozmbLrlL5dx7lXYH3UrYrfqt/hy6Tm1bxGSk6ju+/GjAO8oqURAh9FAbi81JT4p+UTRccTXUZ623XKRqNx7h9O8qQ1IlrYjDJzahNiyxxHFdI3+Y0fe12LfVBpd0L8n/wCVMd3vxYjWNzcUW6Ox0Z2eAUuk6JuUOibDbVzimwmCgTNFafqdqs1JOE1m3PtsmqQGrF56j4BwfUc7OqPhvq1fBjEDymoV3S4V0+ZmCnAisfyPc5RIwLvIypV3RYYhDzOqVfjRHRHfUbekePjOx4cE+M/BqfFftOM9WFLLVkVMbPaTfhkqar3nABOdmZ6kOIPldY5vzCrbbzHFpzCAiSjt+rH3UnuMF2T/APKm0gjMdrfjRGsbm4ot0ZpjOzwCIfGLWeVlBq/xcUdUbAzOdnQQz8OH9zrDg460lMbP47GQxV5+OWuWbsXa0Bw8gscQOpE6w1ZwYr2cNyu6VCvfUzFfBjAnymh7CbiAMypNeYzvo/yiIDWwR7lX4sRz3ZuOsIY2RtHIIMYJNbQBXWH4sSjeHHXiMydPXkVMVb+Ne60LN2fYRHO3tJ1rm9hsLgOtD62vMUQBf0zMnqUacB3GoV5jg4Zi2Towe7ysqpaNDbDGbqlTjRnv5nsA1omTQJsP5sXHMp0V5k1omU6K/fgMhrxW8B2N5mz+NXJuak0dhdzUT21uiJpE/Nkk+Fuxby7G9BiuhngVLSoQiDzNoV8OML3ldQ9mNLiinyD97AIIvQxVwGKrrv8A6Oyobr1ItKkAZqcSvDsp5KGzzO1pjELrH4rdoWdKwfEh/cd2ZAfJsZglI77b8jDf5m71ccWmdQRrDi09hMow9F/9n9l0hiXnZuqtpnsgWNhzG7NXHfDieU9jOyEzJpOpd0mI9h3ZFfqRZKvSP5lfChNZxsxUQQpXcZDce7CHpc3s8+8IRIbg5pwIRiuqcGjMp0WIZudrQuNOwdAqYfmG9X4D7wUjjbkRvQhRzMbigQZg64Z6mwjytA1Qx3xYeR3clfhPmN43hTc4AcVJruldkxXWnoGZNx9+8NZoruq7bBwlmi2Pg3YG6WvCfk4a50TRzX53D8WXobpIMjC4/NZtztkVcj/p/Mf3QIMwda8cTZHP1S1unjfqOGzkjEgxHXvI40VyIwsdke8CHCbM/hXG1cdp2ac8D4kLrD9+whuzaDqmDo+1vdkr8p6lyL14X4XTQDeYcrQcwQho8Y/Ddsk/Lqy3WE5J7syTqw4rm3gx05Lo6sfuDt9lyMwO/ZHoR0rOGKm+C9vMdn//xAAqEAEAAgIBAwIGAwEBAQAAAAABABEhMUEQUWFxgSBQkaGxwUDR8OHxMP/aAAgBAQABPyH+MDaAj44AyR3nngrJmC1ykbjVTk+qu8TczXeEVo0uJS9sLG4labgGZYUt+GVqhh1BPE2abqpbyDtFyk9pYHsr1FneC74Q8higULtzqCR5pxHW0/cECKzgePlQtqiWXFhLD07yuPdaeyZQ9DFolc8TX97jgXa8Q8PGEXNypU8UIn0Cs4lRbb3qK0IRDnFyHvLe9ysN/eA9L8q+8/zDKNCM/fpQEKXFjgi8V7MIbkNsMa7EdwNwxp4eZ4lNjx8mWo3Hw930IfenKwHtoipe2XgfToJzshXcRDQl1NLn3jjR4l1F458zyV4TS6B953GvSCwzOu8peso/4jwB+sTsVeYUyMHqkmPV++yUyB7ioLVB7RmjzBOP1mEYhffhDsmz5KtpOFzLqtzYO6OY5tFohVUBu7jmuBdJtm2cQIMXMriU8mXWeeJt5TAdvaKXhnY/mWtGbF48TBbPZKV37yur4CEuXlvWwilnPKCF78OH+4tEYmvBHAi9L3INlnyOr1tpyr2H71Nuo8vssai3mK6lquZCZnaHPTxF86mlcQ3linDc9yzLCkHu9oTqFAZ+8U2NneNApz/rhXfoPDMv4K4VWw0dkC7L8NRReC8k3uhoRnmGVYIN7Z6O3yLJeY9iYVRbXZmr+7Cwi9l3/UTojVwv2i0XRN56c9A46YUgWMbeDpqDwi6IsD3oBeE3DZVd47m+Ldhx6SqDkexKYbPHdKIFhHjDXsiG3unwnCdmMGMBK4fu7/IVCdrjo7+JeagvcGVfMaeHCWpZl4mtqoatb7EQ+J4Ez1xzP6JtGvBFbUe0qanpJd7ltGKKv3cypoV9GUbYc/tGxSZdeZiqt4nMh2GoghlsiYNtniUOAnFxVk4H6hl3jIOVyPyDyxHzO079pocN+sHAPJyzx8tWPO4gtJgYiJ+Z3ewj0cEJdTBlWzFvvAi4+AgDm0MU0v5hm/zfuVKB5lvz+RHH+gyzD9ZVswBV1xHWnQ55l+FqvHY9/wAy/wCfcYJvES2N6ebhRPWvEMZiud3PmUpvzUGxg0RuVw3Cuvr6k4JwQtbmVRCgRxNoRRzKJQzxjr9QTuh2jN6ob7kGnCPvCJM3Z3mQRfEzw6/E0I+0TyKpPxL1q4XPYy9ClN/zxarTx9XiMQtpt7wuqIUxcJSjmAsm9PEwho7T6rmVBjrs9oWKg1LKljNeWMoxDXQjzHEXSE62SyK50y3Ese/aK1kvDHL9BjF8XhllbiVzcUS6JZ/PtloQPView0VAMmsvrDa6MRT03g8SwFWUTYsPqmUBDSKxCXeJoUvaDywd5pPqm8rmMYCcv0lqmxM8dxunoi5xv8y7vcH0mE5pMS6Ybh/0QKLb/E4Oejtux5OSIVsArx/PGlZv21+YKTsSlgN5ZVijH5hhtBDL5n2ETYShLoLllGhEIKDT0h98x75ZX18Ll4P+pbAehxNNHxMS1XcQjhriIZ0wqmO5EnhQsOL5iLjJ+5K8xkCepbhWGuJSydvyhKcn2mOnvM3hkZTPVfP88GTpPBj9yphjNsB59YiQXy3HQYKtmIve46b0QrLLSHd1Me4rVqB0ECUgMwNRTBGrUJ4RUBt9jh4igpVZmI7U9mUiD5hmLx7EpjgKi1S4t55mk0xZGrph5M1FUyk9uP5/oJR3NqP0E2VjxFd4feLZZclhQd1zKPdigGDELRDTE4oEqVDoVK6GocxyTgomTDJmUDW9zCuxAyKQ3mLJcB5JfeVVhEgoEypYzByDvR5lBIZPV/n0CgD8n7mGXYhcnkZRj4YeFbf1l0QpbzLS18ypswSkMSohAQJUqVKlQTYztoC1NtEwFTTuhYguRYSANtz3UlVrULOobbw/1OFLcx7QbzJo/wA46j8iNjLMQ7QDkZi/QJpfYigd4LzcvoHmVpUqCGoQh8NROgMyQA4lYDvLpWZo9RGhIWB2IqvZh1lmXtopjUGrjq7KMkLxyfz61EUERuy7hdF9ZsVKcps8SyFiaJighCEOh8CQdLHFo+ZQuVdSB99O2ZzMwu0qc+kRk2vaOdue8BbgFjmaXbX8/wChJx7xFIrxMENG/wC5Z02IlFdLSEIMJfxMYnRwvEwjVxRW4uZbeEs18faVX5hlu7MtdyNOBFAURYL5nJlFX/PX2BqcYldFhq42m4Vae8DFaIONVMEoIOghAgSviYxg6Q3alT4KiOYwlTDrUIb2d53D8DHcElV+4go/ntYCa4QyqD6Eo0e7NJW/rUyl8ziEMEHQQgSoEqVKldRJUTqBYQ2FVJTf1RBSrD7RgUnh6RKQWL0zFq5x/PAiMQBzr57EIfEHvlcyuawSgd5qKMrexNePScyM5JSB8AVKvqPREZC2hXTGPrHouCuXIYipY5HZLWC4IrGi8MPkBqkQt3DdzA7amS9AtnhC8n0EYg0o1c4cSkFL9ZR0qahgMKZSVKiE1Fms6ArVJgqezMDee44l7VfnEHMy7d5tLiuhEje/uI739agFKB5FP6+Q6wbLGYCNywDPXkO4t7CJkeBGvQ9Jl9XIRTSWli7fiOmx9dymQqt1Ea5llaesZAaQdcwgamUONpjFpsJ2Y8y9Lp9ZeVi3etiOMnpwbVysJhFxvnotk7ytVfokU8Qn/vf5CwAR4YibwnPMyPWLHQs0cupYLxFMFvQgr3Eg57n1f1HtoOLUPse5R/qZTR2TMYEpEx7wO74Qse+h8oRljbMlmYMQlD3gFDe1m+lGjL8SxfoCHba80q73J20Pyj6ErGY8I2j1NwydoWGwa9YHVV+T6/IRRHmYEUbh4na+zixkgkN9kPPvE5N8K6gBC+R/SH5bvt+rLG4W8zHuN3lmgeSUsC/L9St/oZeFvLjavs5hi/tSwf1BlD3XbtMkIwNF98pzEI3OxPpTTL1D7S+qPJX1RpUZsOYn64MkuBE/MzbVRnQ74KP/ACeEPkWVYhQPc8jTAVvtVdw9efY+kF4tN95QowGjpYNHsyxQxaZZil6DbeiYCx2wfvKGWal1gsdy2I6zSfPiUMT42++4l/bAYWK+3TnEaT3Q7V/vz0CfUGFUwRk7WlAZ+oz9LgWWuXgZK8iNoOxkQjiMDgUWNOYcg/eXIHnvA8AsHRCNtg9jlNDkwmx/nqnR2z1XlaAGxg9rj+oRycQWC68B7NSkiEoc1uK2ZjsXDzzLyUuRbihVgPFTaU+s9IA71faZ2IIu9PY/8godpWlD/wBOP3BsOS/uy2VpDb7euFkSewJgctOLXsjXJJqrOiGWah95iTZp/RLlk9YS/H7mBLR6A1BZ5l6pUTJH+bkmJU7LcOT/AKR/npv2BjYHAJnJG2JfKpazDPWVeyv6gMwN2szKHEvaxk9qan5GMUeqE0FTq+IMCIPufWX2KbrvjM3vEV2zBPcB50pn0OudvB73Gi2Bg8yze/deeY2gNNQopxumBu7YZL8sUYiNim+IddanqG/S7fxHHQHiYUgapg+lzs327x11xMxWv3/n2j3P3gtCdflf+YXaTDiIcMmT2zAB0LluIbZCQVVWZcEObA2jlPO3a416BgdDREw7LI0o5G6p0gWWAwiEoUhzGnJfrBDBFvHR9jWfw/cYZXqw+83m3ccvpDAmMP0/7/P9y/0zCt5YuYNAcQ9Ee0Z9HXJo66jqBTY/3+zLmds1JiSoneFl9hlBXB0VKuUiJToYb2p6NfuIk1iJHNiNoOZ6z3LXzf6/55MtJUw3It9ZU+5IskPQbA8EeSpUqV0qU7+hE2er09JrHmU06dz2zXRiutS+LnfpDCjjpaSjeX4lABiu+ae8HShR8gquvrrf3nt2/Saeg16KIU+PvAvSPvFdp7T3iD9I7e73jEck0msxgm0WJlT3dmW2ElSoJ0XKnOfE10d8dQexFMbB57f4/fyFC5gveH/yKh3BamAmvQQZfpXFQ12iOutOHTSVPVLKEYWW/wAEf8oi7LHMYxxZhkZcCPxrib/mj45+Qk8XQ+ll71TXtM7sjDVywh6B1tZQnGmVQVCgSjHKK9xAF9NyW6idClc1xJVuclzLTl+/yHy//ZG8HJYJqlfBIOHwaTEdiABDkN7hd5k7hTDUWDx056MYpg6NzFG1RO3B/cAAaPkWNaT6k5o8jMxLI4oQ6aMqjETd4gcwnglWqrtpiheZhQ7EtnhcoF0ZelL6sUcwyxUzrFJkOkUPHf5Goj+M7S4NwEZyI5r6AwYdHUUvod9MZrygzVhbJnxBnJcvDrcKu+5tZRdFy4vQw9JZuLyQuiEahzV36wAKCj5J9PGGP3Rh10lHBhLjGNGpmg0RYLniIaB0uXFi9DBHmUKXh2vt/wC/J8Y4D9WLrSily4xfQjiX0ZcvouLoOZxb6VkbW+rn5PRhmh9GPEydSUuUzKXjoLNy7mWcse7KvPwE6RY8R0TEzxu36cwAKMHycW+U95YhSUkydFRS8QSqwDhGqriUzLs8lKFpPWhyTupabnjSwi9HXQxy+zHvT/vv8psw/Z5mrproFlG4q0l3qIQDvLqu+LZ6SNBfYxT7qdOW/kuiW1nqod6Ua9+RZlhOqalCjUqOOm+ejTb8k+U08/11KMTB0HDconRtIxAMAqp4tz0QJ4+k4VmXMtckfJGLKjr6EvuzwfK+a3f6Ojx9O16lUqY4mfEFA3Oy037Jl5mOpuMGpcelqjVMq0QcUrJ3+Vm1d230uEBLWprnFLIRcBjlG0SeJRgIq+qtdTBPJA8B9y+WUrwfsjcu+3SVpKCKKGesyTeE1HpstuY6Ohpm2p9cvs/LMv8APcsj09lgIS4z0HQJXRTtPREiRi1FiVwxcdNs89Vvu+VokAyrxMLFhzOEhYYaXJKxLSDH8EjFF0KjoiBVxKBehKSqhtkVx42fSAzC8Pl/T5SiQDKvEZvgaD/P7T7wjiVJizMoYlfrDOJb1q7hLixb6ikghzN56CUdDNEzMOCuGF8APQdnydQKtBzHp5qP7P8AMzYggnCClvdmxL5feIj7RkGoXrgPUSnQwzihCEd28Eq/9Mp4lU0ljCzM1DYTyGmfeRJ7SuvEvy/6+TLumvxP7nCw0dN7tEJPYSok9EtmbUpj0LvLzDO5ATcrq55YHEMKtTC/VC6LZrlfTwTDkVPchbNyPdmqLr0f+TV+w+uwy1NsN9p+SJxNn+TiPUXau1nMsaIoX2mPWKKSkwysdG/PTqhGiUgOzDsRbHhjzJfaHjPBK5T0BMVWi/Y/uaVA332rf2g5hiyodl/cNYGw+RXvEa7fEUPeD12CcwZ6Az6qYt/Fe8MkSWnw/EkknQg6JGfp1KBlUORUskAVhFPLpJrELKXn0u8FED8gS/kXiCml1+VjjoJR/ozLJclY4b5lx2qG5UslkY9HQeM8MIJIOsDolvvyfpBShQQR5TxYuhzM+irfqR9Mvh9P5ob70n2nnpirscE5bf1MQ23UvePQYn3H5TI6Hp2TeF9ybjFkIegFmEIHD4EkYyh5BAAdBx0KC09w30mX4NZCVSldjlMi0f0/s9ZZmnjPbSACCOk/jtBbsCUwLX+bLLK/6O5cBvn8srADl7veVgL+l2I9RiY+/wDmPormNiBl626gb6WCDqK61QxNLuWbRt7w7WDo+nIZc96zaPRleD2n/I/EsTTLz8AdyJnvXfaVSPWvo3KxXtkPb+Hff5Mu3vLz/NGaPvEyZzZC0sQBVwBOGT7MPSB67vBFru08eOtTVoJeHw6lSo7MR2M2gf2lwXCCVKhFdFCMOFx96AQKDo9Z0KUsdrbdGpUQbIMqaaS4RRz3mOGnfQoC6WmWbD6IVyX6EDWvSWP/ANW3g4TyQ7/7ssQX+rbPLAuHQc1em/wqaJsy2U/3UXodG4q/YQ9JKlRDIseI2YXDDE8YMuXDobtotaCYlLw7JVfEvK6e0Zjm2b9TxLkCOj0gsmHD/pkH4PRbDl7SnGfS+jUMPYo+3/wWle0oI8knBs/SdnXv73Evy3cMeqUgSykzf7Mw/pKHBDWqDRw5hX1uvM7uZxOe6vqP+QfDVEMFjGx3otooVGM5En8S7bN/EbTRcyTBat1UuybT06gtOWb4lzLdjenMIPTnoMNIozZxKlQ879dyuJn+rCD/AKWzrfAPl/1HHgv/AMuK/CcB7alr0qZQ6CKEXQcsPIXiM9LCM9tX0A6GZcB1evm15hnqHWpQKSxjtC8joCS8yqN3/e9JjcPz8L15BydTtGwPuyuhqEIaYXX6RWQJRYlIxxG9ndamofFdT6fcn2lB/oENSuCqYtlX0V0EVKldF1zlR9H3gOO76/0SxWE3Lr1nMDoR0HdfkgY6EPh3KCCdufaZhnpuWTuypgMDt/cKCjXxPVk8DXvKt7r7H/ej0x6Ab0lj2glDR3vMFRDs5ce4Sv8A4blwaYRUroHxK8f7ackxWAjiJknv8ggY7mmzunEyzAhNwlC7CHQhL6oCgBteJVgLpL8IkYuGA0BD/O8N5CIf/MQAT3/f8LGPS8XE223LP/Uwf+dHpd8ntPFfDMLHheszOlccP4htPdm336ek9nMoTIFoTf8A8DrXTiHx6bMJpOJ2ZMH3+8NztosZ/wCJ4aW89aw4mpfQg3uT9nUdbi1tqYrxrgcoB7d/v+6gmBphGDFhWpm3sjsiSGr/AD+IbbIE5+Bj0xrRCqJlb/0utdAcN0+fWgI3vD2SNCLlVL9J+T76l/aeXL1ivKvd6vx+nxV1OpHqCXlHlGC8sX1CcVMPgJmCr33hjofBQ8r2vDoEoX2ZRtqOL78e8Vv2H+xCHSFPrc3LvWHRq9H9wWwLE5Oq9GMvEQvuMVMx3+jHwVD6sawcUDgvfuxhd3dfp2iA04K+Hf8A9ddD4HjPt4HdhnlXO/6nJFHmuH0/EG/hEdruUj/wIdLm0Ps+P1fMIbe5OZeiuaysNbGcp8ePEFmzq4f77dCqqXxyXpUsGW8x29J56hPEGXoQroXLt/vHrz0qH4++U59O/rMMbgOHn0Mbuz8HtL0EbVOifHXT/9oADAMBAAIAAwAAABARzjjThzzhQq7LII8p6G808ZTzxjyTCxgzjxxTxgzjgproQpgAA4/6FqQ7CwDxgDTDwTxzzzzQhAyigrRjSzAMrxoUVzzzzyTzwDzzAywDzBVAEJboTgAwqQCSg7bSTCwDwzDywxxxzwJZH4nJrIRCySCBHt3xyzzxhzzyTzjTwzwIrqASksItIImJa/sEzDzTzTzzATxhTyghQEgF6stt9ALpUpSMEtQxywDxwDxwwzzwiyKz0subAE28hw1lKezjTwxzzgzxzxhzziah4lvV7pHUyIpffLQrzxxjzgADzDRzzixprYR65Qn6zIQCxJoYKxhzyjTQzzCzzzzzx4QJPeKgtwdYJpRnFqzzTyiTzzCzzTSzwwwDUcp75ovnBN5etMzwTCDzzzxhTxgDDTx4qyXQ4VMAj504vuyjzBQzzyDyyyTTzwy7bZWCAF0CEbJTAPgJtTzCxTDjzzxhhQjwpLjDDpz0LXaetfhDOrzxzSzzzDzzTzTSxi1k6jr2rN5X80bg8MPzTzyhzwAxgCzziwxFMsxT1U3FYOckPOw2zRByyBQDzzzzxzhAP5SGzVZkHkh8LV3ZjDzzjjzzxzDwShxwzoWLBvhEjl1GjsXpBzyzwADSwDSwzzDCCzxsuCoHKmk4hCQEZwhyjzSzywDjzAAxThjgBWrAR1a20mQxt0ThyRiRxzzyzDwziTzzThHqROBp8gNx8pzzzyjTxzjjzxzzzzjzjxDoL/U95zTj1unzjzzzzzyxTzTzwzzxDzwyBCxmzJTcA1dmzzjTTwxzzwxzwxzzzzzys/DOjX4kZHl3THzzwQyyzjwzzRzwzzzR9tlv+mF/ba+igXfRTixzzxTQzzxzzjzzmtbsOes+dBegS2fsdDTyhDwzwyxTzzzm/Q684kx4vio2lCk7EUT1vDzzzTzwxCJ/bgJ5HHXzkW3hTXqX6LW+YROjSxzzR97W0kL8smVrb9NcYhvfB6D4P3c8ZYnj+Qh48dQEvUr7MCTLy/R0f6MWCPxSDf8AnrwSmDKkzV/fjM53pXBiaXD6bR+eNvD9pYjC/DA/D88ejDh/gfC+gdeA+ChffcheAA8d+//EACYRAQEBAAICAgICAQUAAAAAAAEAERAhMUAgQVFhMHFQkaGxwfD/2gAIAQMBAT8Q/wAp4vNsPu5NvB6bb/EnOWemXmP4Ukj8emxyGyPiEyxGQ7kznPWINchDWwLZ7gFkD2T8s4PTN3kP1PDycG6ks69UhwW/rl5IbNlub8IY56nZjgtt4W23g426jnqNLgdzQechNiJ4aXXvqeTB5N+Bv/WQB8wPjiVLW5tr73/RjxRTbz+o+kNv02An8kIyO+jJ2PP3/caN8L9a+iwHRwwHcx2ydEEuEZqehkF4pDBHrI3J6vojn1Lyy3P2rdCo6BaDz/MAXl+rBNBCCQtkfu6oeg8L+7dn6ugHGzll0boSmyA4bw0D/doD0S2fxzVPNpYj8w6hDkv1HEdpFD0oGKcbdW8FyOPmxGHjh9QAC0X0e5nTg8gwvuyQnz8H1dn6TrEKiZsjBkvercHPE2cJYtlN9NgY+GW4UkRwt3Z6vecZfm2PiMuy/TAw/flZaD6uTyZaSiYveG8pJk3BsTD1vFL6+GWPwY4D1vEXh8d5YZ2y9UuS0w5Jvy2Gdsse5p6a5LtmWX7OBNtfUkyC+4wl4WIWHVp6Kh2y+BYt+eBttlltlkDUiKfMML0/zKE/hJe45JHSL8zjbbeUDYi/UydxJsvRgP8AEmVLBeeSIcv2CyeMgGsr3wz5jhNIYU8R+cB+CCfxnVtu8L9cBPA4OrWUsg6HbMtfg+eCLw8ZwMgPm2234v8AA8heG9ktPj8Hj746sk65P4N4ey8fIsPaBbDxsNYnk/7P1+vr+vHwOcfqd+4+OR8Qnx8wxCBCT/2v/D8HxHKs2emYjn//xAAiEQEAAgMAAwADAQEBAAAAAAABABEQITEgQEEwUWFxsZH/2gAIAQIBAT8Q/EFwJccV43EGJXqBi4+fZyESJXpCPncuDDFRia9I5Kw+DkYOLwRK9AwyqLjg8iDBiek6wy52LEkpAsYDDeGXL9UYtFx1ol4GKZcc1DYGBw+ivDWaqPwMMGXuGH0VYpfA8RqB2jO5h9A7jiO3FSsV5Wxwx9ElEWOCiLO+ATAbg0m6ox9E5OCJ4J+4hBScirsuXKQTtR/X/pHtUEqcMPokIFscH0lqz+UqoI7sg0fJ3RP6z7FXst+pacgKi4aSLRbAvPQVFzuR7RaXCJpRN6R5Lh/CDYYhVlR3LIg2KkZexN1y/oRYzhN3KTDYwZUGKi5bVBv0UpneAlMpjCMGVjvgmj0dWb+NQjglsZUO4tsND0bi48xfggYPE7lj0ksplSPhWKCJu4y83MDj0xcJgzUrDHHYPvq0OS0aJcs/cuOQhor1bS5WFO8gH2V8Y+GCXN+s8g+xwLBYOQisv1k0s6jklRwE+BE39V1RAGEez9kT9YMkfAgT6pcs9NFogiiWMlV3Ayz7h/qU+RVgQg1BS5a9F1RB/wByo/qWKciSs1KlQIiog1EMA6Yv6H5k4l3YDRGGIEpnbxKlYBlFRBP9wemMGpsDTBciV+FHYCEPwQKKwYMd+UEdEA0YMTKwCbg9QY6h4Ig/YJyVAi14Qncc05H2eQBRghiTA3Ff+PD4EBzcROwJUrK/uDeo6hCdRjhCE2OyyvbwJ8nBGUxZsiV+NJox35Bc43IECKY714M/mdncAOfkVE5eRgKibh1GsPyE/wDZ/wBgreeo9yQdRCG/L//EACkQAQACAQMDAwQDAQEAAAAAAAEAESExQVFhcYEQkaEgMLHB0eHwQPH/2gAIAQEAAT8Q9a9Nvt6/UxMMqsvRUXDQ4pgejETcgsoFcOzmF5XtsiuwNHNZesJT2xVTSZLqxIqJVqiD+bjC7Zsq6Fx0yeIv2vpozHygyh1iPyEMXK8LrFrWFIfhld0ZoI0xyxs4a9xxHOpbHd29AxEQItGy/ZjWEDDoSXJauqG7ybkeJrlguya41rwMMrKwMChRHDAfKJXLU9Ss0hlyjbQYVowceu3/ABn2H6H62RQLVlvv3a7ehle0d0mpp0gUBjSYVJkLpravxGhcOWsbYihqmx24ljVGVdxJzhYME0C1Bq/7EcVSUE5wICBxgiEJbWknQjB08Nr5jVJvcMpBcgdrZiQpc861KIY2KNImaOKPvs94lVGYxSPJCiAnDzKlkYqhv1loxWqyPf8A8gC6l0Aqm2RE2I1yhc1tay4ymNeJpgtD32l409ISmeMmBss+i/v19W3ofZuDq7w8QwNVq61FjsaSmI2VTUyXMGm0ETvTjGI2Ijke8R3UBYHXn8wnBomY2Ic3Fa4DfWWDk18xKcSlIitIXDVO0XujbD/5EYPkHllAmSZ3PSKaFQF9xMvWm9YevMcy3DVXzHq6dWhHVTddXncixwHUbiD1iwmTuhQKuoxUeVC3aIn5VkVo3CDokAG6QZqtF0raKzbLWTWHJiwvUSOui4f69d/tn1nofVfpv9R4RyHZemsF9Y0S3DUuhoBvFls+iEZyIUaPEFouiczUFXiFgLG8vMR/ZBaHDmMI67xAZWHzKrXa32IZCiacSxHVt2xz3g6Nhy6sEXsoXEVZ61mKhwj/AIkGw1vZr3mDrchzlVENsWpzUBBax0X8QxkZnCO/EdS9dzNxHde6UdU19oIUB1t0deTvDq4VbLcTY7jtMKN8LmbGivQ0t4l4BR463a9Qc4/cAkESxNz69PSvq3+rX6/H0rXabXAwqkOS3VZtUOZl4yONKaC1ztmIssmh30lXCawMASHhiHIYg0YJ+4x1FapzCkDeBbSmsQM6CHMTDbmbmQ16xVa1qm3aaNxpG+lDnpKRSvtHM1hoNgh4KniWd11BodQZjLnFMxmVCkLy7D+JkqCUOW3HhhViXCoJySz7CpXc5IfJwPB1IuWp/AfqIq4GJxuXskRVLYECovRrCbjjgq8vWM5NFeE8S/vePU++949LRn13K6wptQjcshyLZRksIova0jqAdWvM2huJWpglQVgYiGbrgwAwEx1luCVjCaQrPYJdXXmFocuYGp0irNimZiRnL2mWnk1YtvP4l7teCUiydpggsV7Ra5MwtA8FdP2TRGLbHsn4mHQhVq3XmOgu4xa7v9xAoMm0tvnDACpeVnwcSjoN1eHhHbjzG6zTYOdxrne+jByMhbWFY+QyJGgEiN2gwmzmt5g/8l+lfaAtdICWjeKqwOq0eZctpNxY7pxXQiFh8iIEmsbqi7GFWFw5htA169ogV6Tdjvg0F1iWzd/iWlXxmLVPMGSiROqL2Q2HdQ8wAXq+ZQebHmmhBYDBzxBLVnrOjvQN8h6MaFxfDByocULOi9powNU/8GXyodZsOQZhuAC0aLenSXzy222uuTZ6wHRC5xa+YygMrv0ii1WGwrX8x2WmX2AvH76xTV1TQa/pO0qgMrocdUNk2/4NZX039b6NF0AQyQuJMyzqoy9WWqt2sXq5YVMJYLG0eKtl94dgl/50j1CGmgycEesye5r5fxHlGddmkaAQVgNO8AwBFveL4IEDukIh2bWGk4lsDsEqotphmS2VYdvSnVwSg0uVauOuZi+kqw+JS0ehePPmVIhw0oTimp1l14Gm3P8AbkzqgyI12neF2ks4wc9PxLV91g1107fidAvHSXCUyiTdJ6DRfc/DDTTWKBgtwcdhzAcn3tvTT7NfUF10tgWxdBIt5Jb7BXxAMtl6FdEsVx5o0d/1AZM6B1nPmB2BdjYfqH2vFmTrFYgBZ28s6Ia8u3EpWtWJ0iJaINWXM4MWJ7zEND7zBb2v5lwBqkGXOkCyiHWIZSsNgmkdovk/uUC8Xl4ho4fd/ZCoDDDHc/nZ1gqWqGmmOsLO1Wx1Bz2i+oAtnMVErWl7oOQpdrtNIkgOiajvpGw8TCOjy416cwi4BVN3mH3GbfQfYr6W8uDxWw7lLyFby1IHFQrto0CEi0at0A0PeVMs2rXvC7oQvTq+I2LdHcf8yzM7pho8ROUXkjRYWespS+ZVq7EDG+ZQNQlTfTvFBonNSsqxv0irfK0xOBvPfaKtjYX7Szhh1i6CUmsu4NfzLANDsO8rxGlnX3iFYTcjZ2mb8PjH+JQIaimBNvO0MBGQu6r+4BWtg0R56MwZZocdZoW2aPIxEcCr1PaWYFmMjIhyJHWyRDcdPr0+5f1P1afC1yrQ7ZY3C1GId/lhJBM2ryz5ltAABurMmBoO/wDCNSXByqyvAH5l2WLlarmIasF0EXbi5bmsasLmqzmWuLWYx6ZgsQ6mGa7Yt+GZk1Fbr4iF6MkXSWoxqFZp5hdFN6t4qzotA25jgJTpqckMuEiCibWMswpVvEWhhUbP8zNSNWc0f1NMECkf9yQxjbrXx3fmVJqxoa8JDKUVLWnIfEv4A0Yy+vRiNoNrWjNoaml/ia5vLdupGROhrYsH79/Vf136XUrpMz5sV+T2hWgjdaeYJq53NgmloBXfI/siKlUyt8x1Wi686sZ5aanfK/EsoDFr1YA7K7A/xEOLADTpUcErwwFAb0bIXuFKsM/3Nar5tNfEXBywce/SZwBLdvA50/qZVDfX2X+H2i77Jv2rSPmjwDmLcFgoY8S9C8g1XiajZLNtNIoVVYh0a/hjVrAsfsmvUVz/AGH4iUomZYxixNkY6rZaibOr/MDszLgefz4uGCy0KwevioFYCKHdwynl6OIl00osVQ6/iVWBHGymj7V9vf8A5Lus67gAD7qU9EpOOCUMUYB3oiXe0b0tf92lRSQeLNebZTQ3I6csCsMltb4096jrMAXnBv5YlABeDof3+GGcl6FR0qV5LlScOn6gOFDoB0l+hE3GPzAqVL01PHEK01wRy3JA9TEt4ZNK1mENw5Bbb0mPAvYhj5i2RRWJoACeSUBdgU0sT/eGU7eycbntBACaSsaafmLbAgjfIy7dD8xziN+JhxQpVqf79TH53Pfk/wBzBqLBBxro/n3i3WVAaU/3FAofjPR4/H1v1M2/4G5ShvTjoq2jz12r5hVjWze2DMLAQGBODFQbSAzThGgRG5L9D9RhNUDhi3/do9ks6H+5lQoARqOIATCQriBQCDokKYCaOksYA0xFsrxiNiOKti9IIWr5P9+JUgqQO7tXx8QEkAfKxGVStUzisjAKQKCzSuPc9oTFsOdHWu37YFztUODU/wB0mNGByG1/qDsMIpTLRqGe5AmaG+jWHskVoYM9MxmMCghgb3zTKx0CuLspx26/cv6NPqr6a9VoWtJcEB6zTeXlQXQQKOmJgM2scl1KKhYr1/1xlMQgTWAgbhj/AGxCBaBi615joqnLzUqGAv3had4gjjHSYNKgVOpC2kCQfePTAbwA08w64CVGxl4gBS3Y4msS8ncmrVLdSqiJgPXH8fMpwQDkTb8xhGAveYENWq81FY5DeNR5IYOhGw45lACgb4dX6mt5ZNzp/uIIezY/7WAFEbjL6nRKfU/69aoE9F+ucW3eQwH4lC1FBfLVwnLRwHlxcW1u1PiJ0zHRW6xyRsytXVT/AHiONaRdgl2UUMdIWBKgbzQQGMQQ7eg5lTwnJLrjDAQKFbzpwl9KVYrguNSTKDbd5/i5W6BX3KikcIoHTe5QxKDHRhEKwWQ9VKYPn+Zphxbbj2a951UA1GNirXv5jA9L7hsXrX13L+2fY0+hpPcW6R48xVlHDmKpG23SajgVjl2IAGBehu1n9EpWCkRlG+vBAlgVlWjYgA95RXEBAdJqnV6d0CVEuE7QNKJl0jKuL5c6DoR1sNQ0jo203z0ahaFqI4tZYbaIXiyz8wFQ25XpmPFWBnG3McWeViUKs31b94tSbEFF5KdcS7OuuuiXvpr6VMfb2/4QzBTgZ934M3NeLrqiOnK0dX+IYA3HU3W8NGOnzArVOLWZatXBD0NOZkMaQVYMRxzNFBcEIXM7wesXGIIb7y/eFTLqDce5Gq3CscAfiMmCiHutfiIGaugdi1/comw41xT8wEksF3WZQytS+LJKKi/FXqS6aOnMJNIyhcMbx70pUFXXT6Saep9o+2xE+MBsL0lyuVQFZlzQpeXQg5OouXvEV4mmscGEtwk2aMAMazBNGmIYesxTB0hSBAxpKuVPeLb8xXKusLbMIOIuKa7RNoACO2kYDcCAbR22Qb5d4S21pGYG4liNtTP+2izoZs/KcMF3RrlvWZKwIsCHSzTF11IQhem+v0P0bf8AOfAAbNq3N/5j2VwN/GMXKGsL8j/BCFKO01dXG0wIFwTiBXBVEqAxKKNYGKhrzBpGNJTiE+GY+nTK7kAupFHFzDGapYYh3pDFGkuMQKHXELESwBzM0O8wttKjq6cHSKrKMOp/iMOozJSJSU5HOEho2/669doLAiUjK4FLKKT4ijvBRdDWvx+JWjbX7ANoATeTdhidRbBKaY+ILV3qP9Si27QNsFZF8DdQgRPMwbS9IKXpMWYGkOMeBuOyHA9RSMM7F7wVUFa2w7SjZlVvKxZUqJYrAYyaJzHxQwOl95sibo5ZiMMKpHjnvLImF1ICUdYhBG/qPv16H136LoBFDtd+arfxCOGup10Xr0hIalpW/WApq1rTaCsDNVLsi2Al29t4zcroHR/5NroAb87sMq4zWG6/UxMWrFM9X+Jh2hjGYsUU6ZhGEhTKXFSxIi6G4k2zAZY0MQrL0IAiFgIulOtbwG6bWhUVQxotnbGzKiTtZP8APEAFCalqRkKhfC/npOqUwHWmkqyYW7qIWu+HuEOpXDjFZr/uGDd9xkQOjvbU5h6n3b+jf7L64OhVNAH+b8QgbKg410+PzGoBSWcSpUYWxQFKwLWPRmAyff8AREgNQ/8AUKozgtuOFDm9/nWNzttbbUu6u1bYyxfErkxWYj3KsepLj1uABlrLPTvG7Aim8OSdfxDikSZrMxZzcIpq/mUukcjVdaDmvzEI2Fgt71ePeXzqW7YrqwnoG4e8xQBoFiVwx8nszyvvzEmqu0VJ2dJUFWQV18QFvaps5jq0pL+JYOEUKIZQVZtXuf7ibGpL2j24i6u2daATG2o6leufU+rT00mfr2+2S9m9BhmY0mmzhrio+i09ZqmDrFfF8jSoE2mAKe1xPC2tfzDuCxar4ILbmKGFJFo+TiJgJhCF63AJJjDgcJd14iw2QXBoaO3zAbksDHN9jGO5DjbYiZO/oRLtbLm48UsYimAG2S/zGBMMavVt2Kq4ZXJpbvXY/wB2j+YGE2etGZEK9iJxlIR5ULh2pfeVITY5+Qg9lvGlCdWA096gYUJ0Qb9fGIA3msTMoWFSMtLdXjj+PMyklHAar9e8q41lvQ05JkvgPvP/ABjlQKTklpohJADRz/MAoMAMoWrbOcaxmh3BWTZheBXcraABLS2z1mVdOEfN7PlhM1ZcvfIwAtacxb73jtIywRfEQVuQJiMbaNQeWPiXd5aZ7+Pk7S3mPIHcrZGyU4ut1b9kQjyuiboQaeqNLuDLquGMq5omAamK8d3S+3vMujlL925Qtu0LtMAdRELFvg5Isqzn9ynzKtTL4gKHs1F6gqhH4ZdFGf8AMkTMCsfDo5+ZdHlYe/8AviNkw4mR/LxNLcC6MXvBh6X9p9H7D9lYI+0dUWf1gGLh4tUzlXMdD12N01m2kGuiqrqnQ9r94ICAANjaEube7Eqd6B4IgIame0glEoMmOlszZ1vN7QIoylQM8HklUECB0SWz+CyFUBqbG+8BVxVte4lXliFnHrhYa3N5WkasHUxzH8l6NoBfaiGov4mfTEajQyEV5j7tA/QjqN0rc/ELDToDftN4vtHNGjTxDoMrm5gfD+YPvsC4AOWGWO1dRqaZsAOah3AfWR2CBBa0FAJTnpVeA6GMrWSdxErTuFR7cn2BP8+j6H/KfVYl9+n8ynl2y9Tq3r2gF+TlS4D5zq+YI6QWcOv8SnTLUhKlJATtSZ7zJcGKlXUl9Ieu0M5fYIR5wANFF92SLEJUOFQb6FWKZqNyLovDWfIRXbMlkep31w4iWg4sRW4jomiTOPw0gtydxDXywZmQRVCMSseEu3xBhNe/KpE0EcAEXqLp3OxBQf5lm1bGhFeivLrNlOcUlaLBScLRbDpGkscS0VkZlaG5w0dWp+IHNiZIUrYGr3wqMERoi2gBxdL1uMFVAmYAIEoamjBysLtl6qwIcG8fadiXC1WnRZ+WH1X9Vep9+gVDta1/IRves2wOTtKZK05XcwYwLxdH4mVjzOIjo4T8oQ7P0ShcmqkpbcMXn5jttdmHIH83HAolqlgNcwnti3I4K0OksFIOT8N4ZVSs1pSrqK9oiOiKFETa9gzY7RPrdAxUBXer1ZSYdJYM+Ics1WrDr546yha3SaCh5MblSo5t5qY+Y/aOsO2hsyN+KmCzmX5OKh8iyjUdSYoxP2bHc7RFbOlD5jyKqUDAQPSbNmO4dGHfEdqUHAA0MCVE1pmGANjZavn8RrIaF8IQTQvdTYQf3T/EPpPu7+mn2k54H2fuXqW0+Y2aUKeLLg1AbTlLfzDOtiFqDvKn4hkWCKuEV1OsEBqN5V2AvUIDCohhQYZYtEqbISjIFNeBjyZQBQY19vzMhHJHCbEXPJ7RCkoYcgreyu1RLi7BjsRv7TGVZxzMPXFBwypFQUIySoaJxGUB3YmgwbTLJS/Cn7fbML4g5uW3MNm4sPyQiTea27DRcOHySqQHwLPzG33NpXpcv6dvs0IW2J1/oiTCwvhBZcRNOLzD0MA+I+CodjUUui77/iBgOIJmswK8St5WK2jVCJSJMlZefEONKS2OyjshcagaNvDw4v3p95v8AjhiYQGoItrEbR4ICW1XPE03IW9cp3VeYpSejWBAOFxUSrUZ6SxGlj2S2xFTyx8V6v07x+m5c29d/R+0Z1qQ8JUvZpw4RH6ijiIMd/xNUYDV8REGoOAra6bkILC9ocfSqVWkaF8wmeX3GXBkDbWrKAqPB1xHzg62EIWVQ1Uq4Lk/k+deYUnoY7QIl+g2PwfHD/fuAQoFBxB1NZrTHJY+YXvxvFjffIq/mYeidoK/72Y0AbN21PY+8Aijl4Mw1duQYVI6GdoswU5w6jke/wDOse8/B/PxA+DD9yllVzFGvkB+5lJXYF/morAqlW1/3aUqvLlnZzFgTLHWPVFKWO0RdI0lDRvjQXs6Px2jgd4KlGJ6kwLdhcoo24LTu6HzKDRlhu4ymAT1hSLAemIVNXNzeM7+qkH3T7L9qjQzgDZfS/lLImF7xwu5CWqYzHY3mZMdYpCsti9Me0RzOQ94L6ppcNXVoRGumsSiXdhGpxmMja4wE0TfE6SgCOBohiul5W/UXYDt/FA6UGy/qO2sW83tyiycQogDU1K5dZnO6OriH+lJ4bPxNPtv0no/Q/XXpUxpYHYX4uVS5wXVi/KQdpzillXbtMUtq4rCkBzAS4h0I4DZYUYOIeuYxcoUbEq6kvtoxXNTTBVCYZGO0a4nSYrWoq9I/BFWWZL6w6WmjHJSVm9iM63AbLEswLfyrPivr3+vT1r1qaRmnpf036/+/wBIhvLd5CV4M0uY1ezsTCFpMUwTYkM3zAwwcTNMs76EOihKRc0zwYDGyJMimNQkrUzOtAhknIuolxEVDpKhIQoWW6CJ4OYRnbjeC+2CcGq9rgF0ABwS/sawl/bv6D62Vx2uVm15uO0HP6icg3lNEpHX0vYiNYr09KsrmVYJfEsikvUXyvBEtLSYofn5ijvJa+xHGSjAbykG2xTHeyGjuOfYalOj5hW2aaXMzSKNYRcWKt5qZm5CFbKQOF2gvB0IBUVRFq2UMm7y0OnebfQfffvlkpaac3fuf3DEyoKRNRuDMHs2l4M4JdUxHSWRXFxFlAArNUsOGBRg6lvwy3DGstTOOm1S2LSpXTpAQU0DEPKLq7B0gF4oqDj0OUveIRvKNUuHMua2tl8PmgovXMMdmlh7xodISABQGAPWv+O5r9yrlqD2/kNYhCtXdhx8TTZzpUxhwcSsM+ZaZ9JYndFGOoM2hb0lVqMwANXtBvADxN2S1tbxCAAO0GtoepY8zBKqsRperPGKIxrI9gW/MV67f9DH7LK1of71+QPeFX9zrcby4JedIfMqTRMGvSOcw5JjzFRzU1heavMvFXKEtcMdfeEJqU41nljp0iU8EK1xMDwFyolf4q6h49D1r0r6s/dv7enpes4v2/yHvLdgkrp7S4GYS29po5hi2wzVws17QOS5ld0OIPKE5WXWU5ADmaCNgGOFRpi40XNS6rmDWPpn0V4b7sog9KoLoOfgMJAAUBsejpK+p+i/+Ovr2KZeKYfeoVogzCI0kopftNK2Y8bSk4jVbYj+hXL8zQkraOooxAWrvE2O9wTRQOCtoJ125BLVDpkhKkNMVr7pnKm2sW0yYMyjzdRErzKzmAHpNuULPSbp2Odb2CDT1z/1bfaSIjGAhg0j3z5i7qmYtzLUzMgzEuMphQLjZuWBBYrJZoFoW5JXpeyhfuSmEzkH5liHnQvfEoWjply1vcBA92DAfiv9Qg7BwsfE1lN4SqdJeaTYHlKHHqpzUcJiW/MMuVimM28uAiiQXyCeCjx/yaffPqzn9/UM+R+ojthHRhoeJaFsxmCooqKrOO8suFoxpCz6BhE18woQq66xCAS3EHqAZ0Jbq3kLFBQ8kSBV2riKLYuyXmCDwjKqUHE3SZklKnxL06lpZ/LZ7EPU/wCQ/wCCvRjpQVhpueWpMNaPeKUnJMBXxLTjZhcpZkG0FGb4Zo6CayioYlHaJS2jLNgKxW0dBsVnrAqjrrAFFsoYi7vaDSzYWHdNYcGiDlcHzNuoHc18Gh2+i/W/rr1fR+rb6b+l+wLiR3ZH4ZrVAuT+YCUc/mKNhK3m2esvmeYJe/SYSawzeJkDRmCc5YXZjmZsAVoQzKZjgqUrittuk1cyhaTUYF6+xKtfEPqv7WkfuX9FfaNYuj+EjtG27589uZmq8bZ1igyxg1gf3zLK2hp8yy3UOyXedohdnzANlnQzGkssQcOZbKMKHQmdXM1CBSt0H7i29cq70n6hpNvW/XX1PqPsX66f8ApVeX4S24zLaNGG26SlNZi90eK9o9MTWE0KmnaUrJMEUCMvEzTG2UGVqCG6jJOdg1Xgmfh/HSG3mDtfZL+5f/GepvxUqAZVdiD2sCwI24Dob6uMS1a1hAhmXLfm6ywLprcAc5mOWUxYzpLKGVi7uLNYi2YBpLlzmLYncIIVcErwj/V3jZgeAJwQxerwArqodbCVvLSA7MRq786jqZ/6n0fum/FQoBqrsR8rE6WbHd+2kt5QKmsproDFsS4SgX1j5xHEattCrP3KCnGdZWMl94ek68ANcRY1Y09HlRAYrvCq70lpkqK1QMd3iCK0Hh695UFLxCwtZ2micQ+RIttgdRZwml6nkjEy6MGjV+TZ6P8AzH016P2KhDLAVTQHLHuMM0s2P+dkLSxnqtEKo2p1194mQh90cW9kxcUbxior8eJXN1uhGtQukGquK72iXNzPr0qAVWsq6qiHNMo+QYNWIbNbDQgA/AggKjXTGC9wIa1Wp1NZS2OGn78PmOwePY0o3HRNyLyQZ7+W1H9n3H6a9K+sj9es09SaBl9oO9+XjmGEYvEAm/8AUHX4hNGm4OcRWOI3G4rYLZcqh3ggXKhh5CWQc3mUDqGgyjClEkDQjVkrBCrEGADrLsrvdoRShsq5mTCFSjaCAVYegBSZRcqAe8KddwjK+7DqBNOgOXzR8MzUsi6z9Ts5lHU0rG1Lk+TP039i/wDl19CfSrmndHFh6tEcol+0NqvKxLobS8RlF91PxKMcHoGj71HV5oVojSQBRO8ZHmDYTI4zL11NmqSUHjHECBe4Q1Wb6M0L3MM2BKLT2i1Er1hDf4Ss6pcOsf8Al6VRDY7DGl8iUx+YolAPWb/YmUNW6j3IW+L9TgbPjSFnTxHDwmibP0n1v039b636+Jr65B5ilm3cysG51iOO1zuxzQzXEuVbay9jLr5Cj9Rp8QJ5yADseWjCAkxt1BQTxLdpQ3TRvF2pvCjeZZqZZi0zMOlxbbILVkRWGomtSrNZlIQlWKlQmAYiUMYkyDN+X8ENrLchg7iVLa/jWoPcmatGLwJt1qHfIaHJZZ/796vrfTX7KICjl/lekUspN3ZrI5rQ4zB3QN6lwwFVqr7pQrmAcnQ0Bgywb5jh6kwNp26So1DtZCy1rvCrw2gx0junhMWYGhCpUG5BM17wDa7mQx5jO2m8qOk2P8TEoueluD+YQiBQBQTHKg3cTAFDSuqv7mCq9ZdZOGNEVlt8gb1r2ekpyOY+Vfr/ALSIAWfCOnmpfbtdCReRc1Mxgjd3sF51azHTZkiptuas+Ib0TeYlQ/8AVv8AbekE0mupLIp7jydYIzFpx2PWBb9zoZPmEuGYQZduYO4QSkhZgjDp8TZCxTb+pqzdQroazFnE7kWglUWuD8HWBnNQJpZSPSPZeNZXygT8IdR6EJhh2SEwWZaWB/cRbMtql0MvkrtMaLFwjxqPNQcLWixOjL+70+zrVGJ7zqzOVgurzbkdiHa/lbc4b294T9eWWjdOAzD5aIZ3l1WGfLAlPBtx1a7RLx6OSAbYW7veulvj3JpfH+/iASXGms1+hD+ZeSoreOj1/ME645jg04geJl0aIaGkDuV3h0X0qDTRDtL1qRptMdqhwX3iBLsgZqrRz0H8wMWmCMqGZ4hFTFXMk0vbsVMos2zJme209qe/LiCzpkMI7VDwK/i/i7dElIF1+SNPFQ3Sc+/Lw8XCVV2ie9qPJ6V/wWQsG/2IY8hNgm4UOSAlMLuV7DgO1RlbEZgALV2CEQkbbvg689e0uhh1C+jW60RMrAL4DoFHiLd7VAvtCzgZV1saylDyb2Xv/wCntMdMj8/p+GL3hYmDZAAtWQMuiuwuXpf5gUortCHWY1CoQIXpPiaNKlN7jK1KGuIkxmUFpWMS5JZND3cECICgDB6PEcFtQkSa6BLgjJNctx5azUTzrusEVmVFtB7XTs7LtGpFI4pp6Q0VbWyE07JZMwEDSO0cC3MvEkS8mYBTwVinQfsYPWEUZvQY96hx9sAHRMfdHBi6Je16+IeC7CwXm09gO8VstL2nhr5FmR1XlaiLTDnvM+0IzKiwoHAa9mg69pegK6QgE2OE01s1Gh1uMlbysVUFQAZPF6yt4PTiAa2tGu96edpU3xhf7/mCq42mmZRpkh4gUowkqshh1Vw9OsRWt7SyqsTJhKpMwLKcV2lGqMvlgRiZCsZC1Ood/LADEqolREeWb5iiUuTk0HlPiO6lLn3htBeJVAaJBmNAz3gigi0qwcARmKIuYogYFfifzLCoH+JbeuJSaYeIb36+7Hh9o3pHfcl5eEjk11fsL5fF/YC8NgA5VwS8U5r3hVey5fVbBKT2D2I61cI8V6eInLbC3BE4VgaiG6EDRYOb35aH9QjPQaAMEJRZIjp3GiWB1ekRLlXMcOSBaZt/EQaS20N2m+iGLNyz7oJY44O+omO/m7/s8ywX/v4mghpKmDDwgpEwkeXB11V16dZnUfJGWHMxTBaPiIDKyhS8QPYtXY8rL4oGQ+DggRK8Sqi4iAmcKMnAWxLyAiwkAeGGisapIKvWsM4jeiauOkoBXo5CyarjPARMyavGZdJ9s+Jg0cy8pqBb1nQaS7f4mHMVHVHpXRmIAA0LgOHm4zjevIe3TyEExdit5PXyXvPCmHlmlvwbOtaPmMXl1XiGHgjkRLcEpBapQbML0OIcZgWUBZRoDzHTTDmV1zwaHaWSy4YbVy4PMccOZ4Nw80RwXfeBWuIjqXQnLr6DGLyzKgSty0p41hob47/3Dv8APo0QlXMItmBSO5HGrQ5ezklmkqto5qkqDwvtmXraYFu2ZR7OXeHQFq7rld5XqxRbES2GuaB4b/H5g0HR7on4uIXOHniWmW+EhdE8yg3zFVMqFV/AM7N8mYNkMc9oCOpErUdDGcvGniDT9zK24vGjEqptWdZjiXrpLdEBb6XHc0Pkgx2q6zOVZeKg/wDTMY6+FnR5a1/LADesBWx2mRWkpx+YdFzVd4lAVrtDU1qEFAve7X+Q9+JVBVRwLjpBdKGjW4XgdYygoaRMjF/gRBoB7JlebZ70MDLYo7QEa0FjtwS4Ovz/AHDLnMVf3HtCDFIYzEBnSCLuofl/aNQA0Ik7HeCU7ZkQEEMmhfVv2hEIAoAqj1Yx0jxrFdyrPzBv1I9Wv6j6MbtfzCa22TRmqeYgKZD4llpcVmd95RYA24yMFTEuF0ME4eaq8RFSg7ypt3Fn8oanmYPSAD4lDvVTC7xM3EXE/M7w6HzNVBT0iWF4zE1YHFxNYzKz3ZYNoUb7yjbGYXtC3iWOneBqczBagpUod1wFmoytCdiEeMcnMRCeCUudB74esFEiIu+tx5eFqWSm24o4go7ay0QtzNrzz0f1Mw3+Ybfi/wCYbnMhFy8weLWigb2xG0C2gxryd2Dk7UFPF/qBEOEXF3iXWDwq+7mYsPaW+n4X8wa7y/S6mqaI8XHLA2suuYpOfvjBCbuTigIM5m7iJyY94zOfBEpy5lVeGogZyA9GUaxbTKQQM6ijnFMO57SlMCUWS2ispfLBOK7YmqE7hAwp9AcCwG2c1tcHFuYbO/Po249oEeKqJubsXEW9WF3tjeUrMOrUaygz1m1xL4l95gahdymBSikUUrkdpbg9DWHTt6695hJEMINYGppcx2brsEabafToBsBgJVTmUU0YV4xDWB1bmkY9yUdlakINzWDmDUIIqAC1dAgvqzeya6I0O+R4YfZktizoYZ6BcXChWoMnRPeAXdG+5HELbOmviUZvGnS6nRjEHWqsNUX/ADaHBC2sEuXmL6HiVHcNDtbH78RFJsSureEUf2hjDmOS95k1rDGMwOsYRC42ezZ2miGSY9gn4gcotIDyw7F4HS+ul7sPP1Sk+NTwVCi2hlS1eVge9azosp7x1N7mKE1Jd5nVxUqtoF0RAh4I3oFsM7VABzCvM2OPebY20gJAN3X8QLZm9YXpCu3Ed8Cyk2RFaIKlYJcvzKN72VtFqim4KUO0eNYF6akEi05jagD2pfxDQ3HRhpNGfmXUG9IZL3ltIsaA3Y3d+NIp1Wb4fmvQRwneDYmiafovhhwkxfegFg4s3ddHZZjd1WX+47RQDWOIO+EwHDVZxUUFqwSleFsPPMHsx6xDCMuOZk95VzRKFsMPmsOxseJUcTSEGOwP0mGJiz5h2mG+ZdQBRoAyvEJ5OAM9VP4DbM1yhfLC0+mnaIfnNt45OpiUO0wLiDmiHLNDUbT8Ss0+88eeZmU6NtRb1lQ1HMt2bYHZ6ETjHWJRekvZKbJkxbKJZ5jepHJrwc42IPZVQV+iNj9wOCSfZ+FyrmKtNIhpvE7nmZP3DMy0xMVyHENMOcN7D6BxGE0/czGnSFAmn+K7xOI1Jb3cvXeM47RDjKZhAXQVvKNtoZJ1a9SCxpaKE1Tejc16jMoVisfOYjDvzFs9dR2p8kBzBE5Dlu24e8HYjeR5l2YlyxhksoBzwf7iB4mPtTegXGuV++j+4Ot7RQlVq0hpxKChFV14vGNTqReNpsFgXYMX017wolDE8bc6hCn5lsC4W5e1w3AcGHlJW7KsJk4bIOdGKmbiCHMc6k2bhlqPZENJ/9k="
+                            alt="Kevin Wang profile photo"
+                          />
+                        </div>
+
+                        <div class="identity">
+                          <h2>王楷文</h2>
+
+                          <div class="english-name">Kevin Wang</div>
+
+                          <p>
+                          AI 与大数据量化营销硕士在读<br/>
+                          数字营销实习生候选人
+                          </p>
+
+                          <a 
+                          class="linkedin-pill" 
+                          href="https://www.linkedin.com/in/kaiwen-wang-8b16b737a/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          >
+                          <span>in</span>
+                          LinkedIn Profile
+                         </a>
+                        </div>
+
+                        <div class="signal-grid">
+                            <div class="signal">
+                                <span class="label">Current Focus</span>
+                                <strong>品牌增长</strong>
+                                <small>官网内容、SEO Blog、广告路径与潜客转化</small>
+                            </div>
+
+                            <div class="signal">
+                                <span class="label">Core Edge</span>
+                                <strong>营销系统化</strong>
+                                <small>把分散需求变成流程、规则与可追踪指标</small>
+                            </div>
+
+                            <div class="signal">
+                                <span class="label">Tools</span>
+                                <strong>Data Stack</strong>
+                                <small>Python / R / SPSS / SQL / Excel / Canva</small>
+                            </div>
+
+                            <div class="signal">
+                                <span class="label">Language</span>
+                                <strong>CN + EN</strong>
+                                <small>中文母语，英文流利，跨文化学习背景</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- =========================================================
+         Positioning Section
+         ========================================================= -->
+    <section class="section" id="story">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Positioning</div>
+                    <h2 class="section-title">不是单点执行，而是把营销触点连成增长路径。</h2>
+                </div>
+            </div>
+
+            <div class="story-grid">
+                <article class="story-card glass reveal">
+                    <h3>我的数字营销方法论</h3>
+                    <p>
+                       我习惯先从用户路径出发：用户从哪里看到品牌？进入页面后是否能快速理解产品价值？
+                        后续邮件、活动邀请和客服引导，能不能继续推动他们完成咨询、留资或进一步了解？
+                    </p>
+                    <p>
+                        因此，我的工作方式更关注营销动作之间的连接关系：官网页面负责承接兴趣，
+                        Email Marketing 负责持续触达, AI 客服负责即时分流与问题回应，
+                        数据指标则帮助判断每个环节是否真的有效。
+                    </p>
+                    <div class="quote">“把内容做成页面，把页面接入旅程，把旅程转化为可追踪的增长线索。”</div>
+                </article>
+
+                <div class="focus-panel glass reveal">
+                    <div class="focus-item">
+                        <div class="icon-box">✦</div>
+                        <div>
+                            <h4>Web experience that sells</h4>
+                            <p>
+                                参与官网更新与产品展示型 HTML 数字资产搭建，将产品总览页、解决方案页和核心产品页
+                                整合成更清晰、更适合销售展示的数字化内容入口。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="focus-item">
+                        <div class="icon-box">⌁</div>
+                        <div>
+                            <h4>Journey that nurtures</h4>
+                            <p>
+                                参与搭建 Email Marketing 内容框架与 Webinar 用户旅程逻辑，
+                                覆盖欢迎邮件、产品预热、展会邀请、文章推送和用户征集等多类触达场景。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="focus-item">
+                        <div class="icon-box">◈</div>
+                        <div>
+                            <h4>Data that guides</h4>
+                            <p>
+                                通过 CTR、CPC、自然流量、停留时长、参与率等指标反推内容与渠道表现,
+                                持续优化转化路径。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Impact Dashboard
+         ========================================================= -->
+    <section class="section" id="impact">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Impact Dashboard</div>
+                    <h2 class="section-title">用结果说话的营销表现。</h2>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="15" data-suffix="%">0%</span>
+                    <h3>产品页浏览量提升</h3>
+                    <p>通过官网产品展示型 HTML 数字资产搭建与页面内容整合，
+                        推动相关产品页浏览量提升约 15%+。
+                    </p>
+                </div>
+
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="22" data-suffix="%">0%</span>
+                    <h3>CPC 下降</h3>
+                    <p>结合页面路径与 AI 客服分流逻辑，优化广告流量承接效率。</p>
+                </div>
+
+                 <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="9" data-suffix="+">0+</span>
+                    <h3>核心产品页面开发</h3>
+                    <p>
+                        完成产品总览页、解决方案页及 9 个核心产品页面的结构开发、
+                        视觉适配与内容整合。
+                    </p>
+                </div>
+
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="5" data-suffix="+">0+</span>
+                    <h3>Email 场景框架</h3>
+                    <p>
+                        覆盖欢迎邮件、产品预热、展会邀请、文章推送、用户征集等
+                        5 类邮件营销场景。
+                    </p>
+                </div>
+
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="10" data-suffix="+">0+</span>
+                    <h3>官网页面模块优化</h3>
+                    <p>
+                        参与官网更新项目，协助优化 10+ 个官网页面与内容模块，
+                        并结合 AI 客服逻辑提升转化承接效率。
+                    </p>
+                </div>
+            
+
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="26" data-suffix="%">0%</span>
+                    <h3>社媒粉丝增长</h3>
+                    <p>围绕校园活动与学生组织形象做内容包装，提升账号关注与互动。</p>
+                </div>
+
+                <div class="metric-card glass reveal">
+                    <span class="metric-number" data-count="10" data-suffix="+">0+</span>
+                    <h3>竞品调研覆盖</h3>
+                    <p>在 Keeta 香港推广项目中完成多维竞品分析、用户分层与渠道策略。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Experience Timeline
+         ========================================================= -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Experience</div>
+                    <h2 class="section-title">实习经历：从品牌内容到营销系统。</h2>
+                </div>
+            
+            </div>
+
+            <div class="timeline">
+                <div class="job reveal">
+                    <div class="node">01</div>
+                    <article class="job-card glass">
+                        <div class="job-meta">
+                            <div class="job-title">
+                                <h3>深圳市锐明技术股份有限公司｜品牌市场部实习生</h3>
+                                <span>website digitalization / HTML landing pages / email marketing / AI customer service</span>
+                            </div>
+                            <div class="time-pill">2026.03 — 至今</div>
+                        </div>
+
+                        <div class="impact-list">
+                            <div class="impact-item">
+                                <strong>官网更新与数字化页面开发</strong>
+                                <p>主导官网产品展示型 HTML 数字资产搭建，完成产品总览页、解决方案页及 9 个核心产品页面的
+                                    结构开发、视觉适配与内容整合，提升产品信息展示完整度与销售展示效率
+                                </p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>Email Marketing 框架搭建</strong>
+                                <p>参与搭建邮件营销内容框架与 Webinar 用户旅程逻辑，覆盖欢迎邮件、产品预热、展会邀请、
+                                    文章推送、用户征集等 5 类场景，推动邮件内容从单次设计转向流程化运营。
+                                </p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>AI 客服与转化路径</strong>
+                                <p>深度参与官网更新项目，协助优化 10+ 个官网页面与内容模块，并独立搭建 WhatsApp AI 客服
+                                    对话逻辑，优化用户引导、高频问题分流与潜在线索承接路径。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            
+            <div class="job reveal">
+                <div class="node">02</div>
+
+                    <article class="job-card glass">
+                        <div class="job-meta">
+                            <div class="job-title">
+                                <h3>清华大学基础工业训练中心｜导师助理</h3>
+                                <span>practice-based teaching support / workshop operations / technical facilitation</span>
+                            </div>
+
+                            <div class="time-pill">2024.06 — 2024.07</div>
+                        </div>
+
+                        <div class="impact-list">
+                            <div class="impact-item">
+                                <strong>实践课程组织</strong>
+                                <p>
+                                参与基础工业训练实践课程的组织与现场执行，协助优化实验准备、课堂节奏与教学支持流程，
+                                提升课程运行的秩序感与执行效率。
+                                </p>
+                        </div>
+
+                        <div class="impact-item">
+                                <strong>技术步骤讲解</strong>
+                                <p>
+                                面向学生讲解实验任务中的关键操作步骤，将相对复杂的技术流程转化为更清晰、可执行的操作指引。
+                                </p>
+                        </div>
+
+                        <div class="impact-item">
+                                <strong>现场协调支持</strong>
+                                <p>
+                                在实践课堂中协助老师进行学生引导、问题反馈与现场协调，提升课堂互动体验与学习完成度。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="job reveal">
+                    <div class="node">03</div>
+                    <article class="job-card glass">
+                        <div class="job-meta">
+                            <div class="job-title">
+                                <h3>深圳市麦思美汽车电子股份有限公司｜市场营销部实习生</h3>
+                                <span>new product promotion / user profile / campaign review</span>
+                            </div>
+                            <div class="time-pill">2023.12 — 2024.02</div>
+                        </div>
+
+                        <div class="impact-list">
+                            <div class="impact-item">
+                                <strong>新品推广方案</strong>
+                                <p>参与上市传播规划，结合目标人群与社交平台特性调整内容触达方式。</p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>活动数据复盘</strong>
+                                <p>整理投放与客户反馈数据，形成阶段性报告，为后续推广节奏提供依据。</p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>互动提升</strong>
+                                <p>通过传播路径优化提升初始客户参与意愿，让推广从曝光走向互动。</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="job reveal">
+                    <div class="node">04</div>
+                    <article class="job-card glass">
+                        <div class="job-meta">
+                            <div class="job-title">
+                                <h3>麦尼塔科技（深圳）有限公司｜市场部实习生</h3>
+                                <span>brand story / customer communication / order coordination</span>
+                            </div>
+                            <div class="time-pill">2022.12 — 2023.02</div>
+                        </div>
+
+                        <div class="impact-list">
+                            <div class="impact-item">
+                                <strong>品牌故事表达</strong>
+                                <p>围绕 Magnetar 的品牌价值与产品特性搭建内容框架，让品牌信息更统一。</p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>客户需求跟进</strong>
+                                <p>建立沟通与订单跟踪机制，推动内部协同与客户信息同步更透明。</p>
+                            </div>
+                            <div class="impact-item">
+                                <strong>执行效率优化</strong>
+                                <p>在多方沟通中梳理节点与反馈机制，提升客户沟通效率与项目推进顺畅度。</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Projects
+         ========================================================= -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Selected Projects</div>
+                    <h2 class="section-title">项目经历：策略、调研、内容与组织执行。</h2>
+                </div>
+        
+                </p>
+            </div>
+
+            <div class="project-toolbar reveal">
+                <div class="filters">
+                    <button class="filter-btn active" type="button" data-filter="all">全部</button>
+                    <button class="filter-btn" type="button" data-filter="growth">增长策略</button>
+                    <button class="filter-btn" type="button" data-filter="research">市场调研</button>
+                    <button class="filter-btn" type="button" data-filter="content">内容运营</button>
+                    <button class="filter-btn" type="button" data-filter="leadership">组织领导</button>
+                </div>
+
+                <label class="project-search" for="projectSearch">
+                    <span>⌕</span>
+                    <input id="projectSearch" type="search" placeholder="搜索：Keeta / QV / 社媒 / SPSS..." />
+                </label>
+            </div>
+
+            <div class="project-grid" id="projectGrid">
+                <article
+                    class="project-card glass reveal"
+                    data-tags="content leadership growth"
+                    data-text="香港中文大学 学生委员会 校园采访 活动组织 社交媒体 小红书 抖音"
+                >
+                    <div class="project-visual">
+                        <div class="project-chip-row">
+                            <span class="chip">Campus Branding</span>
+                            <span class="chip">Social Content</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>CUHK 学生委员会｜校园活动与采访内容</h3>
+                        <p>
+                            统筹导师计划、线下团队建设与商务晚宴等活动，
+                            并将现场内容转化为社媒传播资产，强化学生组织的可见度与参与感。
+                        </p>
+                        <div class="project-foot">
+                            <span>8+ events / 500+ reach</span>
+                            <div class="arrow-box">↗</div>
+                        </div>
+                    </div>
+                </article>
+
+                            <article
+                    class="project-card glass reveal"
+                    data-tags="growth research leadership"
+                    data-text="香港中文大学商学院 新加坡研学 项目小组组长 跨地区咨询 市场分析 策略建议 商业策略"
+                >
+                    <div class="project-visual">
+                        <div class="project-chip-row">
+                            <span class="chip">Field Study</span>
+                            <span class="chip">Consulting</span>
+                            <span class="chip">Strategy</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>CUHK Business School Singapore Field Study｜跨地区咨询项目</h3>
+                        <p>
+                            入选香港中文大学商学院新加坡研学项目，并担任项目小组组长。
+                            围绕跨地区商业环境与市场机会展开分析，将实地观察、行业信息与团队讨论
+                            转化为结构化的市场判断和策略建议。
+                        </p>
+                        <div class="project-foot">
+                            <span>Selected programme / March 2026</span>
+                            <div class="arrow-box">↗</div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article
+                    class="project-card glass reveal"
+                    data-tags="growth research leadership"
+                    data-text="美团 大众点评 香港 Keeta Omnicom Media 品牌增长 竞品调研 渠道策略"
+                >
+                    <div class="project-visual">
+                        <div class="project-chip-row">
+                            <span class="chip">Market Entry</span>
+                            <span class="chip">Brand Growth</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Keeta 香港推广项目｜本地化增长策略</h3>
+                        <p>
+                            与 Omnicom Media 协作，从竞品、用户分层、渠道触达与内容路径切入，
+                            为 Keeta 在香港市场设计更具落地性的品牌增长方案。
+                        </p>
+                        <div class="project-foot">
+                            <span>10+ competitors analyzed</span>
+                            <div class="arrow-box">↗</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="project-card glass reveal"
+                    data-tags="research leadership"
+                    data-text="澳洲品牌 QV 护肤品 市场调研 SPSS 问卷 数据分析 消费者洞察"
+                >
+                    <div class="project-visual">
+                        <div class="project-chip-row">
+                            <span class="chip">Consumer Insight</span>
+                            <span class="chip">SPSS</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>QV 护肤品市场调研｜消费者洞察分析</h3>
+                        <p>
+                            主导问卷设计、样本回收与 SPSS 交叉分析，识别消费者认知、购买决策与使用偏好的关键驱动因素。
+                        </p>
+                        <div class="project-foot">
+                            <span>1000+ valid samples</span>
+                            <div class="arrow-box">↗</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Skills
+         ========================================================= -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Skill Matrix</div>
+                    <h2 class="section-title">能力结构：营销、数据与工具组合。</h2>
+                </div>
+               
+                </p>
+            </div>
+
+            <div class="skills-wrap">
+                <div class="skill-board glass reveal">
+                    <div class="skill-category">
+                        <div class="skill-top">
+                            <h3>Data & Analytics</h3>
+                            <span>分析 / 复盘 / 可视化</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">R</span>
+                            <span class="skill-tag">SPSS</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Excel Advanced</span>
+                            <span class="skill-tag">Data Visualization</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-top">
+                            <h3>Marketing & Growth</h3>
+                            <span>策略 / 内容 / 转化</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">市场研究</span>
+                            <span class="skill-tag">品牌策划</span>
+                            <span class="skill-tag">用户增长</span>
+                            <span class="skill-tag">SEO 优化</span>
+                            <span class="skill-tag">社交媒体运营</span>
+                            <span class="tag">HTML/CSS 页面优化</span>
+                            <span class="tag">Email Marketing</span>
+                            <span class="tag">Webinar Journey搭建</span>
+                            <span class="tag">AI 客服逻辑</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-top">
+                            <h3>Creative & Delivery</h3>
+                            <span>表达 / 协作 / 执行</span>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PowerPoint</span>
+                            <span class="skill-tag">Canva</span>
+                            <span class="skill-tag">项目排期</span>
+                            <span class="skill-tag">跨团队沟通</span>
+                            <span class="skill-tag">中英双语表达</span>
+                            <span class="skill-tag">AI 工作流</span>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="radar-card glass reveal">
+                    <div>
+                        <div class="section-kicker">Capability Radar</div>
+                        <h3 class="radar-title">个人能力侧写</h3>
+                    </div>
+
+                    <div class="bars">
+                        <div class="bar-line" data-percent="92">
+                            <div class="bar-label">
+                                <span>内容策略与品牌表达</span>
+                                <b>92</b>
+                            </div>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                        </div>
+
+                        <div class="bar-line" data-percent="88">
+                            <div class="bar-label">
+                                <span>数据分析与复盘</span>
+                                <b>88</b>
+                            </div>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                        </div>
+
+                        <div class="bar-line" data-percent="86">
+                            <div class="bar-label">
+                                <span>SEO / 官网增长</span>
+                                <b>86</b>
+                            </div>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                        </div>
+
+                        <div class="bar-line" data-percent="90">
+                            <div class="bar-label">
+                                <span>项目管理与协作</span>
+                                <b>90</b>
+                            </div>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                        </div>
+
+                        <div class="bar-line" data-percent="84">
+                            <div class="bar-label">
+                                <span>AI 工具与自动化思维</span>
+                                <b>84</b>
+                            </div>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Education
+         ========================================================= -->
+    <section class="section" id="education">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <div class="section-kicker">Education</div>
+                    <h2 class="section-title">教育背景：商业营销 × AI 数据。</h2>
+                </div>
+            </div>
+
+            <div class="education-grid">
+                <article class="edu-card glass reveal">
+                    <h3>香港中文大学</h3>
+                    <p>
+                        AI 与大数据量化营销｜理学硕士<br />
+                        课程聚焦市场管理、市场调研与数据分析、数字营销、消费者行为学、整合营销、AI 与大数据战略。
+                    </p>
+                    <div class="edu-meta">
+                        <span class="chip">2025.08 — 2026.11</span>
+                        <span class="chip">GPA 3.7 / 4.0</span>
+                    </div>
+                </article>
+
+                <article class="edu-card glass reveal">
+                    <h3>墨尔本大学</h3>
+                    <p>
+                        市场营销｜商业学士<br />
+                        系统学习营销、品牌管理、全球市场、市场决策、数字营销、战略营销及商业基础课程，形成国际化商业视角。
+                    </p>
+                    <div class="edu-meta">
+                        <span class="chip">2022.07 — 2025.07</span>
+                        <span class="chip">Bachelor of Commerce</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         Contact
+         ========================================================= -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="contact-panel glass reveal">
+                <div class="contact-copy">
+                    <div class="section-kicker">Contact</div>
+                    <h2>期待参与更有增长感的数字营销项目。</h2>
+                    <p>
+                        如果岗位需要内容策略、SEO、社媒运营、市场调研、品牌增长或 AI 工具落地，
+                        我可以从“想法—执行—数据复盘”的完整链路参与。
+                    </p>
+                </div>
+
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div>
+                            <small>Email</small>
+                            <strong>wang_kw0312@sina.com</strong>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy="wang_kw0312@sina.com">⧉</button>
+                    </div>
+
+                    <div class="contact-card">
+                        <div>
+                            <small>Phone / WeChat</small>
+                            <strong>+86 189-2650-9116</strong>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy="+86 189-2650-9116">⧉</button>
+                    </div>
+
+                    <a
+                        class="btn primary"
+                        href="mailto:wang_kw0312@sina.com?subject=Digital%20Marketing%20Internship%20Opportunity"
+                    >
+                        发送邮件 →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        Designed as a single-file interactive portfolio homepage · © 2026 Kaiwen Wang
+    </footer>
+
+    <div class="toast" id="toast">已复制到剪贴板</div>
+
+    <script>
+        /* =========================================================
+           01. Utility Selectors
+           ========================================================= */
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+        /* =========================================================
+           02. Mobile Navigation
+           ========================================================= */
+        const topbar = $("#topbar");
+        const menuBtn = $("#menuBtn");
+        const navLinks = $$(".nav a");
+
+        menuBtn.addEventListener("click", () => {
+            topbar.classList.toggle("open");
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                topbar.classList.remove("open");
+            });
+        });
+
+        /* =========================================================
+           03. Active Navigation State
+           ========================================================= */
+        const sections = $$("main[id], section[id]");
+
+        const activeNavObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    navLinks.forEach((link) => {
+                        const target = link.getAttribute("href");
+                        link.classList.toggle("active", target === `#${entry.target.id}`);
+                    });
+                });
+            },
+            {
+                threshold: 0.35,
+            }
+        );
+
+        sections.forEach((section) => activeNavObserver.observe(section));
+
+        /* =========================================================
+           04. Scroll Reveal Animation
+           ========================================================= */
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                });
+            },
+            {
+                threshold: 0.12,
+            }
+        );
+
+        $$(".reveal").forEach((element) => revealObserver.observe(element));
+
+        /* =========================================================
+           05. Count-up Number Animation
+           ========================================================= */
+        const counterObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    const element = entry.target;
+                    const target = Number(element.dataset.count);
+                    const suffix = element.dataset.suffix || "";
+                    const duration = 1100;
+                    const startTime = performance.now();
+
+                    const tick = (now) => {
+                        const progress = Math.min((now - startTime) / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const value = Math.round(target * eased);
+
+                        element.textContent = value + suffix;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(tick);
+                        }
+                    };
+
+                    requestAnimationFrame(tick);
+                    counterObserver.unobserve(element);
+                });
+            },
+            {
+                threshold: 0.55,
+            }
+        );
+
+        $$('[data-count]').forEach((counter) => counterObserver.observe(counter));
+
+        /* =========================================================
+           06. Skill Bar Animation
+           ========================================================= */
+        const skillBarObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    const percent = entry.target.dataset.percent;
+                    const fill = entry.target.querySelector(".bar-fill");
+                    fill.style.width = `${percent}%`;
+
+                    skillBarObserver.unobserve(entry.target);
+                });
+            },
+            {
+                threshold: 0.6,
+            }
+        );
+
+        $$(".bar-line").forEach((bar) => skillBarObserver.observe(bar));
+
+        /* =========================================================
+           07. Clipboard Copy
+           ========================================================= */
+        const toast = $("#toast");
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 1800);
+        }
+
+        $$('[data-copy]').forEach((button) => {
+            button.addEventListener("click", async () => {
+                const text = button.dataset.copy;
+
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast(`已复制：${text}`);
+                } catch (error) {
+                    showToast("复制失败，请手动复制");
+                }
+            });
+        });
+
+        /* =========================================================
+           08. Project Filtering and Search
+           ========================================================= */
+        const filterButtons = $$(".filter-btn");
+        const projectCards = $$(".project-card");
+        const projectSearch = $("#projectSearch");
+        let activeFilter = "all";
+
+        function applyProjectFilters() {
+            const keyword = projectSearch.value.trim().toLowerCase();
+
+            projectCards.forEach((card) => {
+                const tags = card.dataset.tags || "";
+                const searchText = `${card.dataset.text || ""} ${card.textContent}`.toLowerCase();
+
+                const filterMatched = activeFilter === "all" || tags.includes(activeFilter);
+                const keywordMatched = !keyword || searchText.includes(keyword);
+
+                card.style.display = filterMatched && keywordMatched ? "" : "none";
+            });
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach((item) => item.classList.remove("active"));
+                button.classList.add("active");
+
+                activeFilter = button.dataset.filter;
+                applyProjectFilters();
+            });
+        });
+
+        projectSearch.addEventListener("input", applyProjectFilters);
+
+        /* =========================================================
+           09. 3D Tilt Card
+           ========================================================= */
+        const tiltCard = $("#tiltCard");
+
+        if (tiltCard && window.matchMedia("(pointer: fine)").matches) {
+            tiltCard.addEventListener("mousemove", (event) => {
+                const rect = tiltCard.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const rotateX = (y / rect.height - 0.5) * -8;
+                const rotateY = (x / rect.width - 0.5) * 10;
+
+                tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            tiltCard.addEventListener("mouseleave", () => {
+                tiltCard.style.transform = "rotateX(0deg) rotateY(0deg)";
+            });
+        }
+
+        /* =========================================================
+           10. Cursor Glow
+           ========================================================= */
+        const cursorGlow = $("#cursorGlow");
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener("mousemove", (event) => {
+                cursorGlow.style.left = `${event.clientX}px`;
+                cursorGlow.style.top = `${event.clientY}px`;
+            });
+        } else {
+            cursorGlow.style.display = "none";
+        }
+
+        /* =========================================================
+           11. Particle Canvas Background
+           ========================================================= */
+        const canvas = $("#particleCanvas");
+        const context = canvas.getContext("2d");
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+        let particles = [];
+
+        function resizeCanvas() {
+            canvasWidth = canvas.width = window.innerWidth * devicePixelRatio;
+            canvasHeight = canvas.height = window.innerHeight * devicePixelRatio;
+
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+
+            context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+            const particleCount = Math.min(95, Math.floor(window.innerWidth / 15));
+
+            particles = Array.from({ length: particleCount }, () => ({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45,
+                radius: Math.random() * 1.6 + 0.5,
+            }));
+        }
+
+        function drawParticles() {
+            context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let i = 0; i < particles.length; i += 1) {
+                const particle = particles[i];
+
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.x < 0 || particle.x > window.innerWidth) {
+                    particle.vx *= -1;
+                }
+
+                if (particle.y < 0 || particle.y > window.innerHeight) {
+                    particle.vy *= -1;
+                }
+
+                context.beginPath();
+                context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                context.fillStyle = "rgba(200, 240, 255, 0.38)";
+                context.fill();
+
+                for (let j = i + 1; j < particles.length; j += 1) {
+                    const other = particles[j];
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.hypot(dx, dy);
+
+                    if (distance < 120) {
+                        context.beginPath();
+                        context.moveTo(particle.x, particle.y);
+                        context.lineTo(other.x, other.y);
+                        context.strokeStyle = `rgba(41, 231, 255, ${(1 - distance / 120) * 0.12})`;
+                        context.lineWidth = 1;
+                        context.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        resizeCanvas();
+        drawParticles();
+        window.addEventListener("resize", resizeCanvas);
+    </script>
+</body>
+</html>
